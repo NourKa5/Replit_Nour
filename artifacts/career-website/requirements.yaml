@@ -1,0 +1,17 @@
+packages:
+  "framer-motion": "For page transitions and smooth scroll reveal animations"
+  "react-hook-form": "For robust contact form state management"
+  "@hookform/resolvers": "For Zod validation integration with react-hook-form"
+
+images:
+  - path: "artifacts/career-website/public/images/hero-bg.png"
+    description: "Abstract subtle gradient mesh background in bright teal, soft blue, and white. Very clean, modern, and professional aesthetic for a corporate website hero section. Light mode."
+    aspect_ratio: "16:9"
+  - path: "artifacts/career-website/public/images/avatar.png"
+    description: "Professional modern illustrated 3D avatar of a young software engineer smiling, clean solid background, friendly and approachable"
+    aspect_ratio: "1:1"
+
+notes:
+  - API Client hooks are imported directly from @workspace/api-client-react
+  - wouter is used for routing between Home and Messages dashboard
+  - framer-motion is used for highly polished enter animations
