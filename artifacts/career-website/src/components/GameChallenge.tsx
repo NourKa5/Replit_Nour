@@ -150,7 +150,7 @@ export function GameChallenge() {
       : { label: "Keep Learning", emoji: "📚", color: "text-slate-500" };
 
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
+    <section id="challenge" className="py-24 bg-slate-50 relative overflow-hidden">
       {/* Background molecules */}
       <div className="absolute inset-0 pointer-events-none select-none">
         {["H₂O", "CO₂", "NH₃", "C₆H₆", "NaCl", "SERS"].map((mol, i) => (
