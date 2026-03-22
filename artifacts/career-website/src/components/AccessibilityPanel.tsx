@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useA11y } from "../lib/accessibility";
-import { X, ZoomIn, ZoomOut, Sun, Wind, Type, RotateCcw } from "lucide-react";
+import { X, ZoomIn, Sun, Wind, Type, RotateCcw, SunMedium } from "lucide-react";
 
 export default function AccessibilityPanel() {
   const [open, setOpen] = useState(false);
-  const { settings, setFontSize, toggleHighContrast, toggleReduceMotion, toggleDyslexiaFont, reset } = useA11y();
+  const { settings, setFontSize, toggleHighContrast, toggleReduceMotion, toggleDyslexiaFont, toggleLightMode, reset } = useA11y();
 
   const active =
     settings.fontSize !== "normal" ||
     settings.highContrast ||
     settings.reduceMotion ||
-    settings.dyslexiaFont;
+    settings.dyslexiaFont ||
+    settings.lightMode;
 
   return (
     <div className="fixed bottom-6 left-5 z-[999] flex flex-col items-start gap-2">
@@ -64,6 +65,12 @@ export default function AccessibilityPanel() {
 
             {/* Toggles */}
             <div className="space-y-2 mb-4">
+              <Toggle
+                icon={<SunMedium size={14} />}
+                label="Light Mode"
+                active={settings.lightMode}
+                onToggle={toggleLightMode}
+              />
               <Toggle
                 icon={<Sun size={14} />}
                 label="High Contrast"

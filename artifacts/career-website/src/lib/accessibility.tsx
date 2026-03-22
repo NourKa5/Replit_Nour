@@ -5,6 +5,7 @@ interface A11ySettings {
   highContrast: boolean;
   reduceMotion: boolean;
   dyslexiaFont: boolean;
+  lightMode: boolean;
 }
 
 interface A11yContextType {
@@ -13,6 +14,7 @@ interface A11yContextType {
   toggleHighContrast: () => void;
   toggleReduceMotion: () => void;
   toggleDyslexiaFont: () => void;
+  toggleLightMode: () => void;
   reset: () => void;
 }
 
@@ -23,6 +25,7 @@ const DEFAULT: A11ySettings = {
   highContrast: false,
   reduceMotion: false,
   dyslexiaFont: false,
+  lightMode: false,
 };
 
 const A11yContext = createContext<A11yContextType | null>(null);
@@ -37,12 +40,13 @@ function load(): A11ySettings {
 
 function applyClasses(s: A11ySettings) {
   const root = document.documentElement;
-  root.classList.remove("a11y-text-large", "a11y-text-xl", "a11y-high-contrast", "a11y-reduce-motion", "a11y-dyslexia");
+  root.classList.remove("a11y-text-large", "a11y-text-xl", "a11y-high-contrast", "a11y-reduce-motion", "a11y-dyslexia", "a11y-light-mode");
   if (s.fontSize === "large") root.classList.add("a11y-text-large");
   if (s.fontSize === "xl") root.classList.add("a11y-text-xl");
   if (s.highContrast) root.classList.add("a11y-high-contrast");
   if (s.reduceMotion) root.classList.add("a11y-reduce-motion");
   if (s.dyslexiaFont) root.classList.add("a11y-dyslexia");
+  if (s.lightMode) root.classList.add("a11y-light-mode");
 }
 
 export function AccessibilityProvider({ children }: { children: ReactNode }) {
@@ -61,10 +65,12 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     setSettings((s) => ({ ...s, reduceMotion: !s.reduceMotion }));
   const toggleDyslexiaFont = () =>
     setSettings((s) => ({ ...s, dyslexiaFont: !s.dyslexiaFont }));
+  const toggleLightMode = () =>
+    setSettings((s) => ({ ...s, lightMode: !s.lightMode }));
   const reset = () => setSettings(DEFAULT);
 
   return (
-    <A11yContext.Provider value={{ settings, setFontSize, toggleHighContrast, toggleReduceMotion, toggleDyslexiaFont, reset }}>
+    <A11yContext.Provider value={{ settings, setFontSize, toggleHighContrast, toggleReduceMotion, toggleDyslexiaFont, toggleLightMode, reset }}>
       {children}
     </A11yContext.Provider>
   );

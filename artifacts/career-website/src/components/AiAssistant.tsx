@@ -149,8 +149,8 @@ export function AiAssistant() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1.5, type: "spring", stiffness: 300 }}
-        onClick={() => setOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 bg-amber-400 text-[#0B0B08] rounded-full shadow-2xl shadow-amber-400/30 flex items-center justify-center hover:scale-110 hover:bg-amber-300 transition-all ${open ? "opacity-0 pointer-events-none" : ""}`}
+        onClick={() => setOpen((o) => !o)}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-amber-400 text-[#0B0B08] rounded-full shadow-2xl shadow-amber-400/30 flex items-center justify-center hover:scale-110 hover:bg-amber-300 transition-all"
         aria-label="Open AI Assistant"
       >
         <MessageCircle size={24} />

@@ -114,3 +114,39 @@
   word-spacing: 0.12em !important;
   line-height: 1.9 !important;
 }
+
+.a11y-light-mode {
+  background-color: #F8F7F2 !important;
+  color: #1A1A14 !important;
+}
+
+.a11y-light-mode body,
+.a11y-light-mode #root {
+  background-color: #F8F7F2 !important;
+}
+
+.a11y-light-mode section,
+.a11y-light-mode nav,
+.a11y-light-mode header {
+  background-color: #F8F7F2 !important;
+}
+
+.a11y-light-mode [class*="bg-[#0B0B08]"],
+.a11y-light-mode [class*="bg-[#141410]"],
+.a11y-light-mode [class*="bg-[#1E1E18]"],
+.a11y-light-mode [class*="bg-[#1A1A14]"] {
+  background-color: #EEEADE !important;
+}
+
+.a11y-light-mode [class*="text-[#F5F0E0]"],
+.a11y-light-mode [class*="text-[#9A9A80]"] {
+  color: #1A1A14 !important;
+}
+
+.a11y-light-mode [class*="border-[#2A2A1E]"] {
+  border-color: #C8C4AA !important;
+}
+
+.a11y-light-mode [class*="text-[#9A9A80]"] {
+  color: #5A5A48 !important;
+}
