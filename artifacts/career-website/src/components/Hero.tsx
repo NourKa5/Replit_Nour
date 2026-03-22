@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import { useCounter } from "@/hooks/useCounter";
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -24,18 +23,18 @@ function SplitText({ text, className, delay = 0 }: { text: string; className?: s
   );
 }
 
-function AnimatedStat({ value, suffix, label, delay }: { value: number; suffix: string; label: string; delay: number }) {
-  const { value: count, ref } = useCounter(value, 1800, value % 1 !== 0 ? 2 : 0);
+function StatCard({ labelKey, valKey, delay }: { labelKey: string; valKey: string; delay: number }) {
+  const { t } = useLanguage();
   return (
     <motion.div
-      ref={ref as React.RefObject<HTMLDivElement>}
       initial={{ opacity: 0, y: 20, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.5, delay }}
-      className="bg-[#141410] border border-[#2A2A1E] rounded-xl p-4 hover:border-amber-400/30 transition-colors"
+      whileHover={{ y: -3, borderColor: "rgba(234,179,8,0.3)" }}
+      className="bg-[#141410] border border-[#2A2A1E] rounded-xl p-4 transition-colors"
     >
-      <div className="text-amber-400 font-bold text-lg tabular-nums">{count}{suffix}</div>
-      <div className="text-[#9A9A80] text-xs uppercase tracking-wider">{label}</div>
+      <div className="text-amber-400 font-bold mb-1">{t(labelKey as any)}</div>
+      <div className="text-[#9A9A80] text-xs uppercase tracking-wider">{t(valKey as any)}</div>
     </motion.div>
   );
 }
@@ -134,14 +133,13 @@ export function Hero() {
             </a>
           </motion.div>
 
-          {/* Animated stats */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, delay: 1.2 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-            <AnimatedStat value={80.65} suffix="%" label={t("hero_stat1_label")} delay={1.3} />
-            <AnimatedStat value={2.5} suffix="yr" label={t("hero_stat2_label")} delay={1.4} />
-            <AnimatedStat value={7} suffix="+" label={t("hero_stat3_label")} delay={1.5} />
-            <AnimatedStat value={3} suffix="" label={t("hero_stat4_label")} delay={1.6} />
-          </motion.div>
+          {/* Stats */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+            <StatCard labelKey="hero_stat1_label" valKey="hero_stat1_val" delay={1.3} />
+            <StatCard labelKey="hero_stat2_label" valKey="hero_stat2_val" delay={1.4} />
+            <StatCard labelKey="hero_stat3_label" valKey="hero_stat3_val" delay={1.5} />
+            <StatCard labelKey="hero_stat4_label" valKey="hero_stat4_val" delay={1.6} />
+          </div>
 
           {/* Social links */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 1.7 }}

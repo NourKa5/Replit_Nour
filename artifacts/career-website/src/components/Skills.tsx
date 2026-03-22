@@ -113,8 +113,9 @@ export function Skills() {
                   <motion.span
                     key={j}
                     variants={{ hidden: { opacity: 0, scale: 0.8, y: 8 }, visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 200 } } }}
-                    whileHover={{ scale: 1.08, backgroundColor: "#EAB308", color: "#0B0B08", borderColor: "#EAB308" }}
-                    className="px-3 py-1.5 bg-[#1E1E18] text-[#9A9A80] text-sm font-medium rounded-lg border border-[#2A2A1E] transition-colors cursor-default"
+                    whileHover={{ scale: 1.08, y: -2 }}
+                    transition={{ duration: 0.15 }}
+                    className="px-3 py-1.5 bg-[#1E1E18] text-[#9A9A80] text-sm font-medium rounded-lg border border-[#2A2A1E] hover:bg-amber-400 hover:text-[#0B0B08] hover:border-amber-400 cursor-default select-none"
                   >
                     {skill}
                   </motion.span>
