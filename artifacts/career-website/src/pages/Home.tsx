@@ -4,7 +4,9 @@ import { About } from "@/components/About";
 import { Skills } from "@/components/Skills";
 import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
+import { GameChallenge } from "@/components/GameChallenge";
 import { Contact } from "@/components/Contact";
+import { AiAssistant } from "@/components/AiAssistant";
 
 export default function Home() {
   return (
@@ -16,6 +18,7 @@ export default function Home() {
         <Skills />
         <Projects />
         <Experience />
+        <GameChallenge />
         <Contact />
       </main>
       
@@ -24,6 +27,8 @@ export default function Home() {
           © {new Date().getFullYear()} Nour Karawani. Chemical Engineering × AI × Automation.
         </p>
       </footer>
+
+      <AiAssistant />
     </div>
   );
 }
