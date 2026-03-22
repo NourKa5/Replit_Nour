@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, Clock, Zap, RotateCcw, ChevronRight, Beaker, Brain, Target, Atom } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 // ─── QUESTION BANK (20 questions, 5 picked randomly per game) ───────────────
 
@@ -699,6 +700,7 @@ function QuizGame({ onBack }: { onBack: () => void }) {
 
 export function GameChallenge() {
   const [appState, setAppState] = useState<AppState>("menu");
+  const { t } = useLanguage();
 
   return (
     <section id="challenge" className="py-24 bg-[#0E0E0B] relative overflow-hidden">
@@ -716,10 +718,10 @@ export function GameChallenge() {
       <div className="max-w-3xl mx-auto px-6 relative">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full text-amber-400 text-sm font-semibold mb-4">
-            <Beaker size={15} />Recruiter Challenge
+            <Beaker size={15} />{t("game_badge")}
           </div>
-          <h2 className="text-4xl font-bold text-[#F5F0E0] mb-3">Nour's Lab Challenge</h2>
-          <p className="text-[#9A9A80] text-lg">Two ways to explore Nour's world — pick your challenge!</p>
+          <h2 className="text-4xl font-bold text-[#F5F0E0] mb-3">{t("game_title")}</h2>
+          <p className="text-[#9A9A80] text-lg">{t("game_subtitle")}</p>
         </motion.div>
 
         <AnimatePresence mode="wait">
@@ -732,8 +734,8 @@ export function GameChallenge() {
                 <div className="w-16 h-16 bg-amber-400 rounded-2xl flex items-center justify-center text-3xl mb-5 shadow-lg shadow-amber-400/20 group-hover:scale-110 transition-transform">
                   🧬
                 </div>
-                <h3 className="text-xl font-bold text-[#F5F0E0] mb-2">Knowledge Quiz</h3>
-                <p className="text-[#9A9A80] text-sm leading-relaxed mb-4">5 random questions from a 20-question pool covering Nour's work in spectroscopy, automation, AI, and full-stack dev.</p>
+                <h3 className="text-xl font-bold text-[#F5F0E0] mb-2">{t("game_quiz_title")}</h3>
+                <p className="text-[#9A9A80] text-sm leading-relaxed mb-4">{t("game_quiz_desc")}</p>
                 <div className="flex flex-wrap gap-2">
                   {["🔬 Spectroscopy", "🤖 PLC & Robots", "💻 Dev", "🧪 Chemistry"].map((tag) => (
                     <span key={tag} className="px-2.5 py-1 bg-amber-400/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-400/20">{tag}</span>
@@ -747,8 +749,8 @@ export function GameChallenge() {
                 <div className="w-16 h-16 bg-lime-400 rounded-2xl flex items-center justify-center text-3xl mb-5 shadow-lg shadow-lime-400/20 group-hover:scale-110 transition-transform">
                   ⚛️
                 </div>
-                <h3 className="text-xl font-bold text-[#F5F0E0] mb-2">Photon Catcher</h3>
-                <p className="text-[#9A9A80] text-sm leading-relaxed mb-4">Catch flying photons before they escape! Each photon you catch reveals a real achievement from Nour's career.</p>
+                <h3 className="text-xl font-bold text-[#F5F0E0] mb-2">{t("game_photon_title")}</h3>
+                <p className="text-[#9A9A80] text-sm leading-relaxed mb-4">{t("game_photon_desc")}</p>
                 <div className="flex flex-wrap gap-2">
                   {["⚡ Fast-paced", "🏆 Achievements", "🎯 Catch & Learn", "🌊 Animated"].map((tag) => (
                     <span key={tag} className="px-2.5 py-1 bg-lime-400/10 text-lime-400 text-xs font-semibold rounded-full border border-lime-400/20">{tag}</span>
