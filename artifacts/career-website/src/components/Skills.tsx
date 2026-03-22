@@ -40,7 +40,7 @@ export function Skills() {
       titleKey: "skill_cat6" as const,
       icon: PenTool,
       color: "lime",
-      skills: ["SolidWorks / 3D Printing", "Scientific Writing", "SQLAlchemy / Pydantic", "Streamlit", "Visio / ChemCAD"]
+      skills: ["SolidWorks / 3D Printing", "Scientific Writing", "Streamlit", "Visio / ChemCAD"]
     }
   ];
 
