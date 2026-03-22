@@ -23,15 +23,12 @@ function SplitText({ text, className, delay = 0 }: { text: string; className?: s
   );
 }
 
-function StatCard({ labelKey, valKey, delay }: { labelKey: string; valKey: string; delay: number }) {
+function StatCard({ labelKey, valKey }: { labelKey: string; valKey: string }) {
   const { t } = useLanguage();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.5, delay }}
       whileHover={{ y: -3, borderColor: "rgba(234,179,8,0.3)" }}
-      className="bg-[#141410] border border-[#2A2A1E] rounded-xl p-4 transition-colors"
+      className="bg-[#141410] border border-[#2A2A1E] rounded-xl p-4"
     >
       <div className="text-amber-400 font-bold mb-1">{t(labelKey as any)}</div>
       <div className="text-[#9A9A80] text-xs uppercase tracking-wider">{t(valKey as any)}</div>
@@ -151,10 +148,10 @@ export function Hero() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <StatCard labelKey="hero_stat1_label" valKey="hero_stat1_val" delay={1.3} />
-            <StatCard labelKey="hero_stat2_label" valKey="hero_stat2_val" delay={1.4} />
-            <StatCard labelKey="hero_stat3_label" valKey="hero_stat3_val" delay={1.5} />
-            <StatCard labelKey="hero_stat4_label" valKey="hero_stat4_val" delay={1.6} />
+            <StatCard labelKey="hero_stat1_label" valKey="hero_stat1_val" />
+            <StatCard labelKey="hero_stat2_label" valKey="hero_stat2_val" />
+            <StatCard labelKey="hero_stat3_label" valKey="hero_stat3_val" />
+            <StatCard labelKey="hero_stat4_label" valKey="hero_stat4_val" />
           </div>
         </div>
 
