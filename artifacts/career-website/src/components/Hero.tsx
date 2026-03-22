@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { useCounter } from "@/hooks/useCounter";
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -23,15 +24,25 @@ function SplitText({ text, className, delay = 0 }: { text: string; className?: s
   );
 }
 
-function StatCard({ labelKey, valKey }: { labelKey: string; valKey: string }) {
-  const { t } = useLanguage();
+const STATS = [
+  { num: 2.5, decimals: 1, suffix: " Yrs", label: "R&D Experience" },
+  { num: 7,   decimals: 0, suffix: "",     label: "Projects Completed" },
+  { num: 1,   decimals: 0, suffix: "",     label: "Paper Under Review" },
+  { num: 80,  decimals: 0, suffix: "+",    label: "GPA / BGU Negev" },
+];
+
+function StatCard({ num, decimals, suffix, label }: { num: number; decimals: number; suffix: string; label: string }) {
+  const { value, ref } = useCounter(num, 1600, decimals);
   return (
     <motion.div
-      whileHover={{ y: -3, borderColor: "rgba(234,179,8,0.3)" }}
-      className="bg-[#141410] border border-[#2A2A1E] rounded-xl p-4"
+      ref={ref as React.RefObject<HTMLDivElement>}
+      whileHover={{ y: -3, borderColor: "rgba(234,179,8,0.4)" }}
+      className="bg-[#141410] border border-[#2A2A1E] rounded-xl p-4 transition-colors"
     >
-      <div className="text-amber-400 font-bold mb-1">{t(labelKey as any)}</div>
-      <div className="text-[#9A9A80] text-xs uppercase tracking-wider">{t(valKey as any)}</div>
+      <div className="text-amber-400 font-extrabold text-xl mb-1 tabular-nums">
+        {value}{suffix}
+      </div>
+      <div className="text-[#9A9A80] text-xs uppercase tracking-wider">{label}</div>
     </motion.div>
   );
 }
@@ -83,7 +94,7 @@ export function Hero() {
         <div className="absolute top-0 left-0 w-full h-1" style={{ background: 'linear-gradient(90deg, #8B5CF6, #3B82F6, #06B6D4, #10B981, #EAB308, #F97316, #EF4444)' }} />
       </motion.div>
 
-      <motion.div style={{ y: textY }} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center gap-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center gap-12">
         <div className="flex-1 max-w-3xl pt-10 lg:pt-0">
           {/* Available badge */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
@@ -148,10 +159,9 @@ export function Hero() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <StatCard labelKey="hero_stat1_label" valKey="hero_stat1_val" />
-            <StatCard labelKey="hero_stat2_label" valKey="hero_stat2_val" />
-            <StatCard labelKey="hero_stat3_label" valKey="hero_stat3_val" />
-            <StatCard labelKey="hero_stat4_label" valKey="hero_stat4_val" />
+            {STATS.map((s) => (
+              <StatCard key={s.label} num={s.num} decimals={s.decimals} suffix={s.suffix} label={s.label} />
+            ))}
           </div>
         </div>
 
