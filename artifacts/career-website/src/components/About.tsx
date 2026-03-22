@@ -24,14 +24,19 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="md:col-span-5 relative"
           >
-            <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 mx-auto">
-              {/* Decorative rings */}
-              <div className="absolute inset-0 rounded-full border border-primary/20 scale-[1.15] animate-[spin_10s_linear_infinite]"></div>
-              <div className="absolute inset-0 rounded-full border border-indigo-400/30 scale-[1.3] animate-[spin_15s_linear_infinite_reverse]"></div>
-              
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 shadow-2xl flex items-center justify-center text-white relative overflow-hidden">
-                <div className="absolute inset-0 bg-white/10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)', backgroundSize: '16px 16px' }}></div>
-                <span className="text-7xl sm:text-8xl font-display font-bold tracking-tighter shadow-sm z-10">NK</span>
+            <div className="relative z-10 w-72 h-96 sm:w-80 sm:h-[420px] mx-auto">
+              {/* Decorative glow behind image */}
+              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-indigo-500/30 to-violet-600/20 blur-2xl -z-10"></div>
+              {/* Decorative border accent */}
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-indigo-500/40 to-violet-600/30 -z-10"></div>
+
+              <div className="w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-indigo-500/20">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/avatar.jpg`}
+                  alt="Nour Karawani"
+                  className="w-full h-full object-cover object-top"
+                  style={{ objectPosition: "center 5%" }}
+                />
               </div>
             </div>
           </motion.div>
