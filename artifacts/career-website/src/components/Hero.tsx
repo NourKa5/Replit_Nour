@@ -24,10 +24,10 @@ function SplitText({ text, className, delay = 0 }: { text: string; className?: s
 }
 
 const STATS = [
-  { num: 2.5, decimals: 1, suffix: " Yrs", label: "R&D Experience",    startDelay: 1200 },
-  { num: 7,   decimals: 0, suffix: "",     label: "Projects Completed", startDelay: 1350 },
-  { num: 1,   decimals: 0, suffix: "",     label: "Paper Under Review", startDelay: 1500 },
-  { num: 80,  decimals: 0, suffix: "+",    label: "GPA / BGU Negev",    startDelay: 1650 },
+  { num: 2.5, decimals: 1, suffix: " Yrs", label: "R&D Experience",    startDelay: 900 },
+  { num: 7,   decimals: 0, suffix: "",     label: "Projects Completed", startDelay: 1000 },
+  { num: 1,   decimals: 0, suffix: "",     label: "Paper Under Review", startDelay: 1100 },
+  { num: 80,  decimals: 0, suffix: "+",    label: "GPA / BGU Negev",    startDelay: 1200 },
 ];
 
 function StatCard({ num, decimals, suffix, label, startDelay = 1200 }: {
@@ -82,7 +82,7 @@ export function Hero() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0B0B08]">
+    <section ref={containerRef} className="relative min-h-screen flex items-start sm:items-center pt-24 sm:pt-20 overflow-hidden bg-[#0B0B08]">
       {/* Background */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[#0B0B08]" />
@@ -113,11 +113,11 @@ export function Hero() {
         <div className="absolute top-0 left-0 w-full h-1" style={{ background: 'linear-gradient(90deg, #8B5CF6, #3B82F6, #06B6D4, #10B981, #EAB308, #F97316, #EF4444)' }} />
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center gap-12">
-        <div className="flex-1 max-w-3xl pt-10 lg:pt-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12 pb-8 sm:pb-0">
+        <div className="flex-1 max-w-3xl">
           {/* Available badge */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-sm font-semibold mb-6">
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-sm font-semibold mb-4 sm:mb-6">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
@@ -126,40 +126,41 @@ export function Hero() {
           </motion.div>
 
           {/* Animated title */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-extrabold leading-[1.1] tracking-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.1] tracking-tight mb-3 sm:mb-5">
             <span className="block">
               <SplitText text="Nour Karawani" className="text-[#F5F0E0]" delay={0.1} />
             </span>
             <motion.span initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
-              className="block text-3xl sm:text-4xl md:text-5xl mt-2 text-[#9A9A80]">
+              className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl mt-1 sm:mt-2 text-[#9A9A80]">
               {t("hero_tagline1")}
             </motion.span>
             <motion.span initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.9 }}
-              className="block text-3xl sm:text-4xl md:text-5xl mt-1 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-lime-400">
+              className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl mt-0.5 sm:mt-1 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-lime-400">
               {t("hero_tagline2")}
             </motion.span>
           </h1>
 
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 1.0 }}
-            className="text-lg sm:text-xl text-[#9A9A80] mb-8 max-w-2xl leading-relaxed">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.75 }}
+            className="text-sm sm:text-base lg:text-lg text-[#9A9A80] mb-5 sm:mb-7 max-w-2xl leading-relaxed">
             {t("hero_desc")}
           </motion.p>
 
-          {/* CTAs + Social links in one row */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 1.1 }}
-            className="flex flex-wrap items-center gap-4 mb-8">
-            <a href="#projects" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-amber-400 text-[#0B0B08] font-bold shadow-lg shadow-amber-400/20 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30 hover:-translate-y-1 transition-all duration-300">
-              {t("hero_cta_projects")} <ArrowRight size={18} />
+          {/* CTAs */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.9 }}
+            className="flex flex-wrap items-center gap-3 mb-4 sm:mb-6">
+            <a href="#projects" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-amber-400 text-[#0B0B08] font-bold text-sm sm:text-base shadow-lg shadow-amber-400/20 hover:bg-amber-300 hover:-translate-y-1 transition-all duration-300">
+              {t("hero_cta_projects")} <ArrowRight size={16} />
             </a>
-            <a href="#contact" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-transparent text-[#F5F0E0] font-semibold border border-[#2A2A1E] hover:bg-[#141410] hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300">
+            <a href="#contact" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-transparent text-[#F5F0E0] font-semibold text-sm sm:text-base border border-[#2A2A1E] hover:bg-[#141410] hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300">
               {t("hero_cta_contact")}
             </a>
+          </motion.div>
 
-            {/* Divider */}
-            <div className="h-8 w-px bg-[#2A2A1E] hidden sm:block" />
-
-            {/* Find me on */}
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#9A9A80] hidden sm:block">{t("hero_find")}</span>
+          {/* Find me on — always visible row */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 1.0 }}
+            className="flex items-center gap-3 mb-5 sm:mb-7">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#9A9A80]">{t("hero_find")}</span>
+            <div className="h-px w-6 bg-[#2A2A1E]" />
             {[
               { href: "https://github.com/NourKa5", Icon: Github, hover: "hover:bg-[#F5F0E0] hover:border-[#F5F0E0] hover:text-[#0B0B08]", title: "GitHub" },
               { href: "https://linkedin.com/in/nour-karawani", Icon: Linkedin, hover: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white", title: "LinkedIn" },
@@ -168,10 +169,10 @@ export function Hero() {
               <motion.a key={i} href={href} target={href.startsWith("mailto") ? undefined : "_blank"} rel="noopener noreferrer" title={title}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", stiffness: 300, delay: 1.3 + i * 0.1 }}
+                transition={{ type: "spring", stiffness: 300, delay: 1.05 + i * 0.08 }}
                 whileHover={{ scale: 1.15 }}
-                className={`w-10 h-10 flex items-center justify-center rounded-full bg-[#141410] border border-[#2A2A1E] text-[#9A9A80] ${hover} transition-all duration-300`}>
-                <Icon size={18} />
+                className={`w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-[#141410] border border-[#2A2A1E] text-[#9A9A80] ${hover} transition-all duration-300`}>
+                <Icon size={16} />
               </motion.a>
             ))}
           </motion.div>

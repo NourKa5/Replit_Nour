@@ -17,7 +17,7 @@ export function Experience() {
   ];
 
   return (
-    <section id="experience" ref={sectionRef} className="py-24 bg-[#0B0B08] relative overflow-hidden">
+    <section id="experience" ref={sectionRef} className="py-16 sm:py-24 bg-[#0B0B08] relative overflow-hidden">
       {/* Ambient background glow */}
       <motion.div animate={{ x: [0, 40, 0], y: [0, -30, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         className="absolute right-0 top-1/3 w-96 h-96 bg-amber-400/4 rounded-full blur-3xl pointer-events-none" />
@@ -26,7 +26,7 @@ export function Experience() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section title */}
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-10 sm:mb-16">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-[#F5F0E0] mb-4 overflow-hidden">
             <motion.span
               initial={{ y: "100%" }}

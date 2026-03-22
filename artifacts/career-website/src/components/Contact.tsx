@@ -47,7 +47,7 @@ export function Contact() {
   const onSubmit = (data: FormValues) => mutate({ data });
 
   return (
-    <section id="contact" className="py-24 bg-[#0E0E0B] relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-24 bg-[#0E0E0B] relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, #EAB308, transparent)' }} />
       <div className="absolute top-0 right-0 -mr-40 -mt-40 w-96 h-96 rounded-full bg-amber-400/5 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 -ml-40 -mb-40 w-96 h-96 rounded-full bg-lime-500/5 blur-3xl"></div>
@@ -85,7 +85,7 @@ export function Contact() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="lg:col-span-3 bg-[#141410] border border-[#2A2A1E] p-8 rounded-2xl shadow-xl">
+            className="lg:col-span-3 bg-[#141410] border border-[#2A2A1E] p-5 sm:p-8 rounded-2xl shadow-xl">
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">

@@ -45,7 +45,7 @@ export function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 bg-[#0B0B08] overflow-hidden relative">
+    <section id="skills" className="py-16 sm:py-24 bg-[#0B0B08] overflow-hidden relative">
       {/* Ambient orb */}
       <motion.div animate={{ y: [0, -40, 0], x: [0, 30, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/2 right-0 w-80 h-80 bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />

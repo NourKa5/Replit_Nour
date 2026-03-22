@@ -8,7 +8,7 @@ export function About() {
   const tags = ["Raman Spectroscopy", "Machine Learning", "PLC Programming", "Python", "FastAPI", "Docker", "Robotics", "MATLAB"];
 
   return (
-    <section id="about" className="py-24 bg-[#0E0E0B] relative overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 bg-[#0E0E0B] relative overflow-hidden">
       {/* Background orbs */}
       <motion.div animate={{ x: [0, -30, 0], y: [0, 40, 0] }} transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/4 left-0 w-72 h-72 bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
@@ -17,7 +17,7 @@ export function About() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section title with slide-up */}
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }} className="text-center mb-16">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }} className="text-center mb-10 sm:mb-16">
           <div className="overflow-hidden mb-4">
             <motion.h2
               initial={{ y: "100%" }}
@@ -50,7 +50,7 @@ export function About() {
             <motion.div
               animate={{ y: [0, -16, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 w-72 h-96 sm:w-80 sm:h-[420px] mx-auto"
+              className="relative z-10 w-56 h-72 sm:w-72 sm:h-96 md:w-72 md:h-96 mx-auto"
             >
               {/* Glow rings */}
               <motion.div

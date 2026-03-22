@@ -63,9 +63,9 @@ export function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-24 bg-[#0E0E0B]">
+    <section id="projects" className="py-16 sm:py-24 bg-[#0E0E0B]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10 sm:mb-16">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-[#F5F0E0] mb-4">{t("proj_title")}</h2>
           <div className="w-16 h-1.5 bg-amber-400 mx-auto rounded-full"></div>
           <p className="mt-6 text-lg text-[#9A9A80] max-w-2xl mx-auto">{t("proj_subtitle")}</p>
