@@ -7,10 +7,10 @@ const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 type Message = { role: "user" | "assistant"; content: string };
 
 const SUGGESTED = [
-  "What are Nour's main skills?",
-  "Tell me about her SERS research",
-  "Is she open to relocation?",
-  "What projects has she built?",
+  "What makes Nour stand out? 🔬",
+  "Tell me about his SERS research",
+  "Is he open to relocation?",
+  "What projects has he built?",
 ];
 
 export function AiAssistant() {
@@ -19,7 +19,7 @@ export function AiAssistant() {
     {
       role: "assistant",
       content:
-        "Hi! I'm Nour's AI assistant 👋 Ask me anything about her background, skills, or experience — I'm here to help you decide she's the right hire!",
+        "Hey! 👋 I'm Nour's AI assistant. Ask me anything about him — his research, skills, projects, or why you should definitely hire him 😄",
     },
   ]);
   const [input, setInput] = useState("");
@@ -91,7 +91,7 @@ export function AiAssistant() {
         ...m,
         {
           role: "assistant",
-          content: "Sorry, I'm having a moment. Try refreshing or emailing Nour directly at noormich@post.bgu.ac.il!",
+          content: "Oops, something went wrong on my end 😅 Try emailing Nour directly at noormich@post.bgu.ac.il!",
         },
       ]);
     } finally {
@@ -107,20 +107,18 @@ export function AiAssistant() {
 
   return (
     <>
-      {/* Floating button */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1.5, type: "spring", stiffness: 300 }}
         onClick={() => setOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-br from-teal-500 to-emerald-600 text-white rounded-full shadow-2xl shadow-teal-300/50 flex items-center justify-center hover:scale-110 transition-transform ${open ? "opacity-0 pointer-events-none" : ""}`}
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 bg-amber-400 text-[#0B0B08] rounded-full shadow-2xl shadow-amber-400/30 flex items-center justify-center hover:scale-110 hover:bg-amber-300 transition-all ${open ? "opacity-0 pointer-events-none" : ""}`}
         aria-label="Open AI Assistant"
       >
         <MessageCircle size={24} />
-        <span className="absolute -top-1 -right-1 w-4 h-4 bg-teal-400 rounded-full border-2 border-white animate-pulse" />
+        <span className="absolute -top-1 -right-1 w-4 h-4 bg-lime-400 rounded-full border-2 border-[#0B0B08] animate-pulse" />
       </motion.button>
 
-      {/* Chat panel */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -128,28 +126,26 @@ export function AiAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="fixed bottom-6 right-6 z-50 w-[360px] h-[520px] flex flex-col bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-100 overflow-hidden"
+            className="fixed bottom-6 right-6 z-50 w-[360px] h-[520px] flex flex-col bg-[#141410] rounded-3xl shadow-2xl shadow-black/60 border border-[#2A2A1E] overflow-hidden"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 text-white">
+            <div className="flex items-center justify-between px-5 py-4 bg-[#1E1E18] border-b border-[#2A2A1E]">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-full bg-amber-400 text-[#0B0B08] flex items-center justify-center">
                   <Sparkles size={18} />
                 </div>
                 <div>
-                  <p className="font-bold text-sm leading-none">Nour's Assistant</p>
-                  <p className="text-teal-100 text-xs mt-0.5">Powered by AI</p>
+                  <p className="font-bold text-sm text-[#F5F0E0] leading-none">Nour's Assistant</p>
+                  <p className="text-[#9A9A80] text-xs mt-0.5">Ask me anything 🧪</p>
                 </div>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-[#2A2A1E] hover:bg-[#3A3A28] transition-colors text-[#9A9A80] hover:text-[#F5F0E0]"
               >
                 <X size={16} />
               </button>
             </div>
 
-            {/* Messages */}
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
               {messages.map((msg, i) => (
                 <motion.div
@@ -161,8 +157,8 @@ export function AiAssistant() {
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
                       msg.role === "assistant"
-                        ? "bg-gradient-to-br from-teal-500 to-emerald-500 text-white"
-                        : "bg-slate-200 text-slate-600"
+                        ? "bg-amber-400 text-[#0B0B08]"
+                        : "bg-[#2A2A1E] text-[#9A9A80]"
                     }`}
                   >
                     {msg.role === "assistant" ? (
@@ -174,8 +170,8 @@ export function AiAssistant() {
                   <div
                     className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                       msg.role === "assistant"
-                        ? "bg-slate-50 text-slate-700 rounded-tl-sm"
-                        : "bg-gradient-to-br from-teal-500 to-emerald-500 text-white rounded-tr-sm"
+                        ? "bg-[#1E1E18] text-[#F5F0E0] rounded-tl-sm border border-[#2A2A1E]"
+                        : "bg-amber-400 text-[#0B0B08] rounded-tr-sm font-medium"
                     }`}
                   >
                     {msg.content}
@@ -183,34 +179,32 @@ export function AiAssistant() {
                 </motion.div>
               ))}
 
-              {/* Streaming message */}
               {streaming && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="flex gap-2"
                 >
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center flex-shrink-0 mt-0.5 text-white">
+                  <div className="w-7 h-7 rounded-full bg-amber-400 text-[#0B0B08] flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Bot size={14} />
                   </div>
-                  <div className="max-w-[80%] px-4 py-2.5 rounded-2xl rounded-tl-sm bg-slate-50 text-slate-700 text-sm leading-relaxed">
+                  <div className="max-w-[80%] px-4 py-2.5 rounded-2xl rounded-tl-sm bg-[#1E1E18] text-[#F5F0E0] text-sm leading-relaxed border border-[#2A2A1E]">
                     {streaming}
-                    <span className="inline-block w-1.5 h-3.5 bg-teal-400 ml-0.5 animate-pulse rounded-sm align-middle" />
+                    <span className="inline-block w-1.5 h-3.5 bg-amber-400 ml-0.5 animate-pulse rounded-sm align-middle" />
                   </div>
                 </motion.div>
               )}
 
-              {/* Loading dots */}
               {loading && !streaming && (
                 <div className="flex gap-2">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center text-white">
+                  <div className="w-7 h-7 rounded-full bg-amber-400 text-[#0B0B08] flex items-center justify-center">
                     <Loader2 size={14} className="animate-spin" />
                   </div>
-                  <div className="px-4 py-3 bg-slate-50 rounded-2xl rounded-tl-sm flex gap-1.5">
+                  <div className="px-4 py-3 bg-[#1E1E18] rounded-2xl rounded-tl-sm flex gap-1.5 border border-[#2A2A1E]">
                     {[0, 1, 2].map((i) => (
                       <motion.span
                         key={i}
-                        className="w-1.5 h-1.5 bg-teal-400 rounded-full"
+                        className="w-1.5 h-1.5 bg-amber-400 rounded-full"
                         animate={{ y: [0, -4, 0] }}
                         transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
                       />
@@ -219,16 +213,15 @@ export function AiAssistant() {
                 </div>
               )}
 
-              {/* Suggestions (only at start) */}
               {messages.length === 1 && !loading && (
                 <div className="pt-1">
-                  <p className="text-xs text-slate-400 mb-2 font-medium">Suggested questions:</p>
+                  <p className="text-xs text-[#9A9A80] mb-2 font-medium">Suggested questions:</p>
                   <div className="flex flex-wrap gap-2">
                     {SUGGESTED.map((s) => (
                       <button
                         key={s}
                         onClick={() => sendMessage(s)}
-                        className="text-xs px-3 py-1.5 bg-teal-50 text-teal-700 rounded-full border border-teal-100 hover:bg-teal-100 transition-colors font-medium"
+                        className="text-xs px-3 py-1.5 bg-amber-400/10 text-amber-400 rounded-full border border-amber-400/20 hover:bg-amber-400/20 transition-colors font-medium"
                       >
                         {s}
                       </button>
@@ -240,23 +233,22 @@ export function AiAssistant() {
               <div ref={bottomRef} />
             </div>
 
-            {/* Input */}
             <form
               onSubmit={handleSubmit}
-              className="px-4 py-3 border-t border-slate-100 flex gap-2"
+              className="px-4 py-3 border-t border-[#2A2A1E] flex gap-2 bg-[#1A1A14]"
             >
               <input
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about Nour..."
-                className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-2xl text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-teal-300 focus:ring-2 focus:ring-teal-100"
+                className="flex-1 px-4 py-2.5 bg-[#1E1E18] border border-[#2A2A1E] rounded-2xl text-sm text-[#F5F0E0] placeholder:text-[#9A9A80] focus:outline-none focus:border-amber-400/40 focus:ring-2 focus:ring-amber-400/10"
                 disabled={loading}
               />
               <button
                 type="submit"
                 disabled={!input.trim() || loading}
-                className="w-10 h-10 rounded-2xl bg-teal-600 text-white flex items-center justify-center hover:bg-teal-500 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+                className="w-10 h-10 rounded-2xl bg-amber-400 text-[#0B0B08] flex items-center justify-center hover:bg-amber-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
               >
                 <Send size={16} />
               </button>

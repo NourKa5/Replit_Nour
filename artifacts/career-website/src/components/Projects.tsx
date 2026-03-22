@@ -60,7 +60,7 @@ export function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-24 bg-white">
+    <section id="projects" className="py-24 bg-[#0E0E0B]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,9 +68,9 @@ export function Projects() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-4">Featured Projects</h2>
-          <div className="w-16 h-1.5 bg-primary mx-auto rounded-full"></div>
-          <p className="mt-6 text-lg text-slate-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-[#F5F0E0] mb-4">Featured Projects</h2>
+          <div className="w-16 h-1.5 bg-amber-400 mx-auto rounded-full"></div>
+          <p className="mt-6 text-lg text-[#9A9A80] max-w-2xl mx-auto">
             A selection of my recent work spanning R&D signal processing, industrial automation, and full-stack software development.
           </p>
         </motion.div>
@@ -83,46 +83,46 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md hover:shadow-2xl hover:border-teal-200 transition-all duration-500 flex flex-col"
+              className="group bg-[#141410] rounded-2xl overflow-hidden border border-[#2A2A1E] hover:border-amber-400/30 hover:shadow-2xl hover:shadow-amber-400/5 transition-all duration-500 flex flex-col"
             >
               <div className="relative h-56 overflow-hidden">
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10" />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10" />
                 <div className="absolute top-4 left-4 z-20">
-                  <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-slate-800 text-xs font-bold rounded-full shadow-sm">
+                  <span className="px-3 py-1 bg-[#0B0B08]/90 backdrop-blur-sm text-amber-400 text-xs font-bold rounded-full border border-amber-400/20">
                     {project.categoryLabel}
                   </span>
                 </div>
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-80"
                 />
               </div>
-              
+
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold text-[#F5F0E0] mb-2 group-hover:text-amber-400 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-slate-600 mb-6 flex-grow text-sm leading-relaxed">
+                <p className="text-[#9A9A80] mb-6 flex-grow text-sm leading-relaxed">
                   {project.description}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag, j) => (
-                    <span key={j} className="text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-md">
+                    <span key={j} className="text-xs font-semibold text-lime-400 bg-lime-400/10 px-2.5 py-1 rounded-md border border-lime-400/20">
                       {tag}
                     </span>
                   ))}
                 </div>
-                
-                <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
+
+                <div className="flex items-center gap-4 pt-4 border-t border-[#2A2A1E]">
                   {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm font-semibold text-[#9A9A80] hover:text-[#F5F0E0] transition-colors">
                       <Github size={16} /> Code
                     </a>
                   )}
                   {project.live && (
-                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors ml-auto">
+                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors ml-auto">
                       Demo <ExternalLink size={16} />
                     </a>
                   )}

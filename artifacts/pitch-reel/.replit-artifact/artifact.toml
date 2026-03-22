@@ -1,0 +1,22 @@
+kind = "video"
+previewPath = "/pitch-reel"
+title = "Pitch Reel"
+version = "1.0.0"
+id = "artifacts/pitch-reel"
+router = "path"
+
+[[integratedSkills]]
+name = "video-js"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/pitch-reel" ]
+localPort = 20724
+
+[services.development]
+run = "pnpm --filter @workspace/pitch-reel run dev"
+
+[services.env]
+PORT = "20724"
+BASE_PATH = "/pitch-reel"
