@@ -228,6 +228,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
   const [missed, setMissed] = useState(0);
   const [score, setScore] = useState(0);
   const [popup, setPopup] = useState<(typeof ACHIEVEMENTS)[0] | null>(null);
+  const [allSpawned, setAllSpawned] = useState(false);
   const usedIdx = useRef<number[]>([]);
   const nextId = useRef(0);
   const popupTimeout = useRef<ReturnType<typeof setTimeout>>();
@@ -235,7 +236,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
 
   const spawnOne = useCallback(() => {
     const remaining = ACHIEVEMENTS.map((_, i) => i).filter((i) => !usedIdx.current.includes(i));
-    if (remaining.length === 0) return;
+    if (remaining.length === 0) { setAllSpawned(true); return; }
     const achievementIdx = remaining[Math.floor(Math.random() * remaining.length)];
     usedIdx.current = [...usedIdx.current, achievementIdx];
     const photon: FallingPhoton = {
@@ -243,9 +244,10 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
       x: 6 + Math.random() * 78,
       colorIdx: Math.floor(Math.random() * PHOTON_COLORS.length),
       achievementIdx,
-      duration: 2.8 + Math.random() * 2,
+      duration: 4.5 + Math.random() * 2.5,
     };
     setPhotons((prev) => (prev.length >= 5 ? prev : [...prev, photon]));
+    if (remaining.length === 1) setAllSpawned(true);
   }, []);
 
   useEffect(() => {
@@ -266,6 +268,13 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
     return () => clearInterval(iv);
   }, [started, finished, spawnOne]);
 
+  // End game immediately when every photon has been spawned AND the field is empty
+  useEffect(() => {
+    if (started && !finished && allSpawned && photons.length === 0) {
+      setFinished(true);
+    }
+  }, [started, finished, allSpawned, photons.length]);
+
   const startGame = () => {
     usedIdx.current = [];
     nextId.current = 0;
@@ -278,6 +287,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
     setMissed(0);
     setPhotons([]);
     setPopup(null);
+    setAllSpawned(false);
     setTimeout(spawnOne, 200);
     setTimeout(spawnOne, 900);
   };
