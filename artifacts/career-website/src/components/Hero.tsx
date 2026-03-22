@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Linkedin } from "lucide-react";
+import { ArrowRight, Github, Linkedin, ExternalLink } from "lucide-react";
 
 export function Hero() {
   return (
@@ -106,26 +106,33 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex items-center gap-6"
+            className="flex flex-wrap items-center gap-3"
           >
-            <p className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Connect</p>
-            <div className="h-px w-12 bg-slate-700"></div>
-            <div className="flex items-center gap-4">
-              {[
-                { icon: Github, href: "https://github.com/NourKa5" },
-                { icon: Linkedin, href: "https://linkedin.com/in/nour-karawani" },
-              ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 border border-slate-700 text-slate-300 hover:text-indigo-400 hover:border-indigo-400 hover:shadow-md transition-all duration-300"
-                >
-                  <social.icon size={18} />
-                </a>
-              ))}
-            </div>
+            <a
+              href="https://github.com/NourKa5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-800 border border-slate-700 text-slate-200 text-sm font-semibold hover:bg-slate-700 hover:border-indigo-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <Github size={16} />
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com/in/nour-karawani"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0A66C2]/20 border border-[#0A66C2]/40 text-blue-300 text-sm font-semibold hover:bg-[#0A66C2]/30 hover:border-[#0A66C2] hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <Linkedin size={16} />
+              LinkedIn
+            </a>
+            <a
+              href="mailto:noormich@post.bgu.ac.il"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-sm font-semibold hover:bg-slate-700 hover:border-indigo-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <ExternalLink size={16} />
+              Email Me
+            </a>
           </motion.div>
         </div>
 
