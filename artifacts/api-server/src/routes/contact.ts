@@ -20,8 +20,8 @@ router.post("/contact", async (req, res) => {
 
   await db.insert(contactMessages).values({ name, email, message });
 
-  // Send email notification — fire and forget, don't block the response
-  resend.emails.send({
+  // Send email notification
+  const emailResult = await resend.emails.send({
     from: "Portfolio Contact <onboarding@resend.dev>",
     to: NOUR_EMAIL,
     reply_to: email,
@@ -56,9 +56,13 @@ router.post("/contact", async (req, res) => {
         <p style="margin-top:24px;color:#3A3A2E;font-size:11px;">Sent from nour-karawani.com contact form</p>
       </div>
     `,
-  }).catch((err) => {
-    console.error("Failed to send email notification:", err);
   });
+
+  if (emailResult.error) {
+    console.error("Resend error:", JSON.stringify(emailResult.error));
+  } else {
+    console.log("Email sent successfully, id:", emailResult.data?.id);
+  }
 
   const response = SubmitContactResponse.parse({
     success: true,
