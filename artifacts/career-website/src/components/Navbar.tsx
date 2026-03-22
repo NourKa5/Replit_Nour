@@ -118,9 +118,6 @@ export function Navbar() {
                 {t("nav_back")}
               </Link>
             )}
-            <Link href="/messages" className="text-sm font-medium text-[#9A9A80] hover:text-amber-400 transition-colors">
-              {t("nav_admin")}
-            </Link>
             <LanguageSwitcher />
             <a
               href="#contact"
@@ -158,9 +155,6 @@ export function Navbar() {
                   {t(link.key)}
                 </a>
               ))}
-              <Link href="/messages" onClick={() => setMobileMenuOpen(false)} className="text-base font-medium text-[#9A9A80] hover:text-amber-400 px-2 transition-colors">
-                {t("nav_admin")}
-              </Link>
             </div>
           </motion.div>
         )}

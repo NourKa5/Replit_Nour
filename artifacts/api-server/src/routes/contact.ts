@@ -24,7 +24,14 @@ router.post("/contact", async (req, res) => {
   res.json(response);
 });
 
-router.get("/contact/messages", async (_req, res) => {
+router.get("/contact/messages", async (req, res) => {
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  const provided = req.headers["x-admin-password"];
+  if (!adminPassword || provided !== adminPassword) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+
   const messages = await db
     .select()
     .from(contactMessages)
