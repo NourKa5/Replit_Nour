@@ -1,8 +1,7 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import { useCounter } from "@/hooks/useCounter";
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -25,17 +24,38 @@ function SplitText({ text, className, delay = 0 }: { text: string; className?: s
 }
 
 const STATS = [
-  { num: 2.5, decimals: 1, suffix: " Yrs", label: "R&D Experience" },
-  { num: 7,   decimals: 0, suffix: "",     label: "Projects Completed" },
-  { num: 1,   decimals: 0, suffix: "",     label: "Paper Under Review" },
-  { num: 80,  decimals: 0, suffix: "+",    label: "GPA / BGU Negev" },
+  { num: 2.5, decimals: 1, suffix: " Yrs", label: "R&D Experience",    startDelay: 1200 },
+  { num: 7,   decimals: 0, suffix: "",     label: "Projects Completed", startDelay: 1350 },
+  { num: 1,   decimals: 0, suffix: "",     label: "Paper Under Review", startDelay: 1500 },
+  { num: 80,  decimals: 0, suffix: "+",    label: "GPA / BGU Negev",    startDelay: 1650 },
 ];
 
-function StatCard({ num, decimals, suffix, label }: { num: number; decimals: number; suffix: string; label: string }) {
-  const { value, ref } = useCounter(num, 1600, decimals);
+function StatCard({ num, decimals, suffix, label, startDelay = 1200 }: {
+  num: number; decimals: number; suffix: string; label: string; startDelay?: number;
+}) {
+  const [value, setValue] = useState(0);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    const timer = setTimeout(() => {
+      const duration = 1600;
+      let startTs: number | null = null;
+      const step = (ts: number) => {
+        if (!startTs) startTs = ts;
+        const progress = Math.min((ts - startTs) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setValue(parseFloat((eased * num).toFixed(decimals)));
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, startDelay);
+    return () => clearTimeout(timer);
+  }, [num, decimals, startDelay]);
+
   return (
     <motion.div
-      ref={ref as React.RefObject<HTMLDivElement>}
       whileHover={{ y: -3, borderColor: "rgba(234,179,8,0.4)" }}
       className="bg-[#141410] border border-[#2A2A1E] rounded-xl p-4 transition-colors"
     >
@@ -159,7 +179,7 @@ export function Hero() {
           {/* Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {STATS.map((s) => (
-              <StatCard key={s.label} num={s.num} decimals={s.decimals} suffix={s.suffix} label={s.label} />
+              <StatCard key={s.label} num={s.num} decimals={s.decimals} suffix={s.suffix} label={s.label} startDelay={s.startDelay} />
             ))}
           </div>
         </div>
