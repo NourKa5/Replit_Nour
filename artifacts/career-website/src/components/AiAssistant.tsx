@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles, GripHorizontal } from "lucide-react";
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -12,6 +12,13 @@ const SUGGESTED = [
   "Is he open to relocation?",
   "What projects has he built?",
 ];
+
+const MIN_W = 300;
+const MIN_H = 380;
+const MAX_W = 720;
+const MAX_H = 860;
+const DEFAULT_W = 360;
+const DEFAULT_H = 520;
 
 export function AiAssistant() {
   const [open, setOpen] = useState(false);
@@ -25,8 +32,13 @@ export function AiAssistant() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [streaming, setStreaming] = useState("");
+  const [size, setSize] = useState({ w: DEFAULT_W, h: DEFAULT_H });
+
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const resizing = useRef(false);
+  const startPos = useRef({ x: 0, y: 0 });
+  const startSize = useRef({ w: DEFAULT_W, h: DEFAULT_H });
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -35,6 +47,32 @@ export function AiAssistant() {
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 300);
   }, [open]);
+
+  const onResizeStart = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    resizing.current = true;
+    startPos.current = { x: e.clientX, y: e.clientY };
+    startSize.current = { w: size.w, h: size.h };
+
+    const onMove = (ev: MouseEvent) => {
+      if (!resizing.current) return;
+      const dx = startPos.current.x - ev.clientX;
+      const dy = startPos.current.y - ev.clientY;
+      setSize({
+        w: Math.min(MAX_W, Math.max(MIN_W, startSize.current.w + dx)),
+        h: Math.min(MAX_H, Math.max(MIN_H, startSize.current.h + dy)),
+      });
+    };
+
+    const onUp = () => {
+      resizing.current = false;
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }, [size]);
 
   const sendMessage = async (text: string) => {
     if (!text.trim() || loading) return;
@@ -126,9 +164,23 @@ export function AiAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="fixed bottom-6 right-6 z-50 w-[360px] h-[520px] flex flex-col bg-[#141410] rounded-3xl shadow-2xl shadow-black/60 border border-[#2A2A1E] overflow-hidden"
+            style={{ width: size.w, height: size.h }}
+            className="fixed bottom-6 right-6 z-50 flex flex-col bg-[#141410] rounded-3xl shadow-2xl shadow-black/60 border border-[#2A2A1E] overflow-hidden"
           >
-            <div className="flex items-center justify-between px-5 py-4 bg-[#1E1E18] border-b border-[#2A2A1E]">
+            {/* Resize handle — top-left corner */}
+            <div
+              onMouseDown={onResizeStart}
+              className="absolute top-0 left-0 w-8 h-8 flex items-center justify-center cursor-nw-resize z-10 group"
+              title="Drag to resize"
+            >
+              <GripHorizontal
+                size={14}
+                className="text-[#3A3A28] group-hover:text-amber-400 transition-colors rotate-45"
+              />
+            </div>
+
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 py-4 bg-[#1E1E18] border-b border-[#2A2A1E] flex-shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-amber-400 text-[#0B0B08] flex items-center justify-center">
                   <Sparkles size={18} />
@@ -146,7 +198,8 @@ export function AiAssistant() {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 min-h-0">
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
@@ -233,9 +286,10 @@ export function AiAssistant() {
               <div ref={bottomRef} />
             </div>
 
+            {/* Input */}
             <form
               onSubmit={handleSubmit}
-              className="px-4 py-3 border-t border-[#2A2A1E] flex gap-2 bg-[#1A1A14]"
+              className="px-4 py-3 border-t border-[#2A2A1E] flex gap-2 bg-[#1A1A14] flex-shrink-0"
             >
               <input
                 ref={inputRef}
