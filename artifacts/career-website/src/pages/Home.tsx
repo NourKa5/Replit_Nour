@@ -19,7 +19,7 @@ export default function Home() {
         <Contact />
       </main>
       
-      <footer className="bg-slate-950 border-t border-white/10 py-8 text-center">
+      <footer className="bg-slate-900 border-t border-slate-800 py-8 text-center">
         <p className="text-slate-400 text-sm">
           © {new Date().getFullYear()} Nour Karawani. Chemical Engineering × AI × Automation.
         </p>

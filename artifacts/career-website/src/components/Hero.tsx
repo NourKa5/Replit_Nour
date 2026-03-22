@@ -3,25 +3,25 @@ import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-950">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-white">
       {/* Background Gradient & Pattern Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950/80 to-slate-900" />
+        <div className="absolute inset-0 bg-white" />
         <div 
-          className="absolute inset-0 opacity-[0.15]" 
-          style={{ backgroundImage: 'radial-gradient(#818cf8 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
+          className="absolute inset-0 opacity-100" 
+          style={{ backgroundImage: 'radial-gradient(#d1faf3 1px, transparent 1px)', backgroundSize: '32px 32px' }} 
         />
         
         {/* Animated Floating Elements */}
         <motion.div 
           animate={{ y: [0, -30, 0], x: [0, 20, 0] }} 
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl"
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-teal-200/60 to-emerald-100/40 rounded-full blur-3xl"
         />
         <motion.div 
           animate={{ y: [0, 40, 0], x: [0, -30, 0] }} 
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl"
+          className="absolute bottom-1/4 left-1/4 w-72 h-72 bg-gradient-to-br from-teal-100/50 to-emerald-200/30 rounded-full blur-3xl"
         />
       </div>
 
@@ -31,11 +31,11 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm font-semibold mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-700 text-sm font-semibold mb-6"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
             </span>
             Available for full-time roles
           </motion.div>
@@ -44,11 +44,11 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl sm:text-6xl md:text-7xl font-display font-extrabold text-white leading-[1.1] tracking-tight mb-6"
+            className="text-5xl sm:text-6xl md:text-7xl font-display font-extrabold text-slate-900 leading-[1.1] tracking-tight mb-6"
           >
-            <span className="block text-slate-200">Nour Karawani</span>
-            <span className="block text-3xl sm:text-4xl md:text-5xl mt-2 text-slate-400">Bridging molecular science</span>
-            <span className="block text-3xl sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400 mt-1">
+            <span className="block text-slate-900">Nour Karawani</span>
+            <span className="block text-3xl sm:text-4xl md:text-5xl mt-2 text-slate-600">Bridging molecular science</span>
+            <span className="block text-3xl sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-500 mt-1">
               with intelligent systems.
             </span>
           </motion.h1>
@@ -57,7 +57,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg sm:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed"
+            className="text-lg sm:text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed"
           >
             Chemical Engineering graduate from Ben-Gurion University. 2.5 years R&D at Atiko Labs developing AI-powered SERS/Raman algorithms. Now building full-stack AI systems.
           </motion.p>
@@ -70,14 +70,14 @@ export function Hero() {
           >
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-500/25 hover:bg-indigo-400 hover:shadow-xl hover:shadow-indigo-500/40 hover:-translate-y-1 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-teal-600 text-white font-semibold shadow-lg shadow-teal-500/25 hover:bg-teal-500 hover:shadow-xl hover:shadow-teal-500/40 hover:-translate-y-1 transition-all duration-300"
             >
               View Projects
               <ArrowRight size={18} />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-slate-800 text-white font-semibold shadow-sm border border-slate-700 hover:bg-slate-700 hover:border-slate-600 hover:-translate-y-1 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-slate-700 font-semibold shadow-sm border border-slate-200 hover:bg-teal-50 hover:border-teal-300 hover:-translate-y-1 transition-all duration-300"
             >
               Get in Touch
             </a>
@@ -95,9 +95,9 @@ export function Hero() {
               { label: "1 Paper", val: "Under Review" },
               { label: "80+ GPA", val: "BGU Negev" },
             ].map((stat, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
-                <div className="text-white font-bold mb-1">{stat.label}</div>
-                <div className="text-slate-400 text-xs uppercase tracking-wider">{stat.val}</div>
+              <div key={i} className="bg-white border border-slate-100 rounded-xl p-4 shadow-sm">
+                <div className="text-slate-900 font-bold mb-1">{stat.label}</div>
+                <div className="text-slate-500 text-xs uppercase tracking-wider">{stat.val}</div>
               </div>
             ))}
           </motion.div>
@@ -109,14 +109,14 @@ export function Hero() {
             className="flex items-center gap-4"
           >
             <span className="text-xs font-semibold uppercase tracking-widest text-slate-500">Find me on</span>
-            <div className="h-px w-8 bg-slate-700" />
+            <div className="h-px w-8 bg-slate-300" />
             <div className="flex items-center gap-3">
               <a
                 href="https://github.com/NourKa5"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="GitHub"
-                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-300 hover:bg-white hover:border-white hover:text-slate-900 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-white/10"
+                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-black hover:border-black hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg"
               >
                 <Github size={20} />
               </a>
@@ -125,14 +125,14 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="LinkedIn"
-                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-300 hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#0A66C2]/30"
+                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#0A66C2]/30"
               >
                 <Linkedin size={20} />
               </a>
               <a
                 href="mailto:noormich@post.bgu.ac.il"
                 title="Email"
-                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-300 hover:bg-indigo-500 hover:border-indigo-500 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-indigo-500/30"
+                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-teal-600 hover:border-teal-600 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-teal-500/30"
               >
                 <Mail size={20} />
               </a>
@@ -147,8 +147,8 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="hidden lg:block flex-1 w-full max-w-md"
         >
-          <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl shadow-indigo-900/20">
-            <div className="flex items-center px-4 py-3 bg-slate-900 border-b border-slate-800">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/10">
+            <div className="flex items-center px-4 py-3 bg-slate-950 border-b border-slate-800">
               <div className="flex gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
@@ -165,7 +165,7 @@ export function Hero() {
                 <span className="text-green-400">"gpa"</span>: <span className="text-amber-300">"80.65 / 100"</span>,<br />
                 <span className="text-green-400">"location"</span>: <span className="text-amber-300">"Israel"</span>,<br />
                 <span className="text-green-400">"open_to"</span>: <span className="text-amber-300">"Global relocation"</span>,<br />
-                <span className="text-green-400">"status"</span>: <span className="text-indigo-400">"● available"</span>
+                <span className="text-green-400">"status"</span>: <span className="text-teal-400">"● available"</span>
               </div>
               <span className="text-slate-400">{`}`}</span>
             </div>

@@ -58,14 +58,14 @@ export function Experience() {
 
         <div className="relative max-w-4xl mx-auto">
           {/* Timeline line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-slate-200"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-teal-200"></div>
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <div key={index} className={`relative flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                 
                 {/* Center dot */}
-                <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-primary/10 border-4 border-white items-center justify-center z-10 text-primary">
+                <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-teal-600 ring-4 ring-teal-100 border-4 border-white items-center justify-center z-10 text-white">
                   <Briefcase size={16} />
                 </div>
 
@@ -77,7 +77,7 @@ export function Experience() {
                   className={`w-full md:w-[calc(50%-3rem)] ${index % 2 === 0 ? 'md:pl-8' : 'md:pr-8'}`}
                 >
                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                    <div className="flex items-center gap-2 text-sm text-primary font-semibold mb-2">
+                    <div className="flex items-center gap-2 text-sm text-teal-700 bg-teal-50 w-fit px-3 py-1 rounded-full font-semibold mb-3">
                       <Calendar size={14} />
                       {exp.period}
                     </div>

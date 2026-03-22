@@ -14,12 +14,12 @@ function HexLogo() {
       />
       <defs>
         <linearGradient id="hexGrad" x1="3" y1="2" x2="35" y2="36" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#6366f1" />
-          <stop offset="1" stopColor="#8b5cf6" />
+          <stop stopColor="#0d9488" />
+          <stop offset="1" stopColor="#059669" />
         </linearGradient>
         <linearGradient id="hexStroke" x1="3" y1="2" x2="35" y2="36" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#818cf8" />
-          <stop offset="1" stopColor="#a78bfa" />
+          <stop stopColor="#14b8a6" />
+          <stop offset="1" stopColor="#10b981" />
         </linearGradient>
       </defs>
       <text
@@ -65,7 +65,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         isScrolled || !isHome
-          ? "bg-slate-950/90 backdrop-blur-md border-b border-slate-800/60 py-3 shadow-lg"
+          ? "bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-3"
           : "bg-transparent py-5"
       }`}
     >
@@ -78,8 +78,8 @@ export function Navbar() {
             <div className="group-hover:scale-110 transition-transform duration-200 drop-shadow-lg">
               <HexLogo />
             </div>
-            <span className="font-display font-bold text-xl text-white tracking-tight">
-              Nour<span className="text-indigo-400"> Karawani</span>
+            <span className="font-display font-bold text-xl text-slate-900 tracking-tight">
+              Nour<span className="text-teal-600"> Karawani</span>
             </span>
           </Link>
 
@@ -90,25 +90,25 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm font-medium text-slate-400 hover:text-indigo-400 transition-colors"
+                  className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
                 >
                   {link.name}
                 </a>
               ))
             ) : (
-              <Link href="/" className="text-sm font-medium text-slate-400 hover:text-indigo-400 transition-colors">
+              <Link href="/" className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">
                 Back to Portfolio
               </Link>
             )}
             <Link
               href="/messages"
-              className="text-sm font-medium text-slate-600 hover:text-indigo-400 transition-colors"
+              className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
             >
               Admin
             </Link>
             <a
               href="#contact"
-              className="px-5 py-2.5 text-sm font-semibold rounded-full bg-indigo-500 text-white hover:bg-indigo-400 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 hover:-translate-y-0.5"
+              className="px-5 py-2.5 text-sm font-semibold rounded-full bg-slate-900 text-white hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/30 transition-all duration-300 hover:-translate-y-0.5"
             >
               Hire Me
             </a>
@@ -116,7 +116,7 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden p-2 text-slate-300 hover:text-indigo-400 transition-colors"
+            className="md:hidden p-2 text-slate-600 hover:text-teal-600 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -131,7 +131,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-slate-950 border-b border-slate-800 overflow-hidden"
+            className="md:hidden bg-white border-b border-slate-100 overflow-hidden"
           >
             <div className="px-4 py-6 flex flex-col gap-4">
               {isHome && navLinks.map((link) => (
@@ -139,7 +139,7 @@ export function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-base font-medium text-slate-300 hover:text-indigo-400 px-2 transition-colors"
+                  className="text-base font-medium text-slate-600 hover:text-teal-600 px-2 transition-colors"
                 >
                   {link.name}
                 </a>
@@ -147,7 +147,7 @@ export function Navbar() {
               <Link
                 href="/messages"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-slate-600 hover:text-indigo-400 px-2 transition-colors"
+                className="text-base font-medium text-slate-600 hover:text-teal-600 px-2 transition-colors"
               >
                 Admin
               </Link>

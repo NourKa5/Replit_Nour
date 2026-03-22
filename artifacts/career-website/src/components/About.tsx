@@ -13,7 +13,7 @@ export function About() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-4">About Me</h2>
-          <div className="w-16 h-1.5 bg-primary mx-auto rounded-full"></div>
+          <div className="w-16 h-1.5 bg-teal-500 mx-auto rounded-full"></div>
         </motion.div>
 
         <div className="grid md:grid-cols-12 gap-12 items-center">
@@ -26,11 +26,11 @@ export function About() {
           >
             <div className="relative z-10 w-72 h-96 sm:w-80 sm:h-[420px] mx-auto">
               {/* Decorative glow behind image */}
-              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-indigo-500/30 to-violet-600/20 blur-2xl -z-10"></div>
+              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-teal-500/20 to-emerald-400/10 blur-2xl -z-10"></div>
               {/* Decorative border accent */}
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-indigo-500/40 to-violet-600/30 -z-10"></div>
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-teal-500/30 to-emerald-400/20 -z-10"></div>
 
-              <div className="w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-indigo-500/20">
+              <div className="w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-teal-200/30">
                 <img
                   src={`${import.meta.env.BASE_URL}images/avatar.jpg`}
                   alt="Nour Karawani"
@@ -48,7 +48,7 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="md:col-span-7 space-y-6"
           >
-            <h3 className="text-2xl font-bold text-slate-800">
+            <h3 className="text-2xl font-bold text-slate-900">
               Transforming complex problems into elegant solutions.
             </h3>
             <p className="text-lg text-slate-600 leading-relaxed">
@@ -63,7 +63,7 @@ export function About() {
 
             <div className="flex flex-wrap gap-2 py-4">
               {["Raman Spectroscopy", "Machine Learning", "PLC Programming", "Python", "FastAPI", "Docker", "Robotics", "MATLAB"].map(tag => (
-                <span key={tag} className="px-3 py-1 bg-indigo-50 text-indigo-700 text-sm font-semibold rounded-full border border-indigo-100">
+                <span key={tag} className="px-3 py-1 bg-teal-50 text-teal-700 text-sm font-semibold rounded-full border border-teal-100">
                   {tag}
                 </span>
               ))}
@@ -71,7 +71,7 @@ export function About() {
 
             <div className="grid sm:grid-cols-2 gap-6 mt-4 pt-6 border-t border-slate-100">
               <div className="flex items-start gap-3">
-                <div className="mt-1 p-2 bg-primary/10 text-primary rounded-lg">
+                <div className="mt-1 p-2 bg-teal-50 text-teal-600 rounded-lg">
                   <GraduationCap size={20} />
                 </div>
                 <div>
@@ -80,7 +80,7 @@ export function About() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="mt-1 p-2 bg-primary/10 text-primary rounded-lg">
+                <div className="mt-1 p-2 bg-teal-50 text-teal-600 rounded-lg">
                   <Award size={20} />
                 </div>
                 <div>
@@ -89,7 +89,7 @@ export function About() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="mt-1 p-2 bg-primary/10 text-primary rounded-lg">
+                <div className="mt-1 p-2 bg-teal-50 text-teal-600 rounded-lg">
                   <BookOpen size={20} />
                 </div>
                 <div>
@@ -98,7 +98,7 @@ export function About() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="mt-1 p-2 bg-primary/10 text-primary rounded-lg">
+                <div className="mt-1 p-2 bg-teal-50 text-teal-600 rounded-lg">
                   <FileText size={20} />
                 </div>
                 <div>

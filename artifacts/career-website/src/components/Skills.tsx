@@ -75,9 +75,9 @@ export function Skills() {
             <motion.div
               key={i}
               variants={itemVariants}
-              className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-primary/20 transition-all duration-300"
+              className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-teal-200 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+              <div className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 mb-6">
                 <category.icon size={24} />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-6">{category.title}</h3>
@@ -85,7 +85,7 @@ export function Skills() {
                 {category.skills.map((skill, j) => (
                   <span
                     key={j}
-                    className="px-3 py-1.5 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg border border-slate-100 hover:bg-primary hover:text-white hover:border-primary transition-colors cursor-default"
+                    className="px-3 py-1.5 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg border border-slate-100 hover:bg-teal-600 hover:text-white hover:border-teal-600 transition-colors cursor-default"
                   >
                     {skill}
                   </span>

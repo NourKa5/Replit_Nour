@@ -83,7 +83,7 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md hover:shadow-2xl hover:border-primary/20 transition-all duration-500 flex flex-col"
+              className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md hover:shadow-2xl hover:border-teal-200 transition-all duration-500 flex flex-col"
             >
               <div className="relative h-56 overflow-hidden">
                 <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10" />
@@ -109,7 +109,7 @@ export function Projects() {
                 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag, j) => (
-                    <span key={j} className="text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-md">
+                    <span key={j} className="text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-md">
                       {tag}
                     </span>
                   ))}
