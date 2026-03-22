@@ -60,7 +60,6 @@ export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0B0B08]">
@@ -200,7 +199,7 @@ export function Hero() {
             </div>
           </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
