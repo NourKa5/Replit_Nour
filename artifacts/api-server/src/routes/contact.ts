@@ -30,12 +30,7 @@ router.get("/contact/messages", async (_req, res) => {
     .from(contactMessages)
     .orderBy(desc(contactMessages.createdAt));
 
-  const response = GetContactMessagesResponse.parse(
-    messages.map((m) => ({
-      ...m,
-      createdAt: m.createdAt.toISOString(),
-    }))
-  );
+  const response = GetContactMessagesResponse.parse(messages);
 
   res.json(response);
 });
