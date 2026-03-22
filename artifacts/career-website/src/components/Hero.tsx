@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Linkedin, ExternalLink } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
 export function Hero() {
   return (
@@ -106,33 +106,37 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-wrap items-center gap-3"
+            className="flex items-center gap-4"
           >
-            <a
-              href="https://github.com/NourKa5"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-800 border border-slate-700 text-slate-200 text-sm font-semibold hover:bg-slate-700 hover:border-indigo-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <Github size={16} />
-              GitHub
-            </a>
-            <a
-              href="https://linkedin.com/in/nour-karawani"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0A66C2]/20 border border-[#0A66C2]/40 text-blue-300 text-sm font-semibold hover:bg-[#0A66C2]/30 hover:border-[#0A66C2] hover:text-white hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <Linkedin size={16} />
-              LinkedIn
-            </a>
-            <a
-              href="mailto:noormich@post.bgu.ac.il"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-sm font-semibold hover:bg-slate-700 hover:border-indigo-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300"
-            >
-              <ExternalLink size={16} />
-              Email Me
-            </a>
+            <span className="text-xs font-semibold uppercase tracking-widest text-slate-500">Find me on</span>
+            <div className="h-px w-8 bg-slate-700" />
+            <div className="flex items-center gap-3">
+              <a
+                href="https://github.com/NourKa5"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub"
+                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-300 hover:bg-white hover:border-white hover:text-slate-900 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-white/10"
+              >
+                <Github size={20} />
+              </a>
+              <a
+                href="https://linkedin.com/in/nour-karawani"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="LinkedIn"
+                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-300 hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#0A66C2]/30"
+              >
+                <Linkedin size={20} />
+              </a>
+              <a
+                href="mailto:noormich@post.bgu.ac.il"
+                title="Email"
+                className="group w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-300 hover:bg-indigo-500 hover:border-indigo-500 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-indigo-500/30"
+              >
+                <Mail size={20} />
+              </a>
+            </div>
           </motion.div>
         </div>
 
