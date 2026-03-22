@@ -114,55 +114,48 @@ export function Hero() {
           </h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 1.0 }}
-            className="text-lg sm:text-xl text-[#9A9A80] mb-10 max-w-2xl leading-relaxed">
+            className="text-lg sm:text-xl text-[#9A9A80] mb-8 max-w-2xl leading-relaxed">
             {t("hero_desc")}
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTAs + Social links in one row */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 1.1 }}
-            className="flex flex-wrap items-center gap-4 mb-12">
-            <a href="#projects" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-amber-400 text-[#0B0B08] font-bold shadow-lg shadow-amber-400/20 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30 hover:-translate-y-1 transition-all duration-300">
+            className="flex flex-wrap items-center gap-4 mb-8">
+            <a href="#projects" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-amber-400 text-[#0B0B08] font-bold shadow-lg shadow-amber-400/20 hover:bg-amber-300 hover:shadow-xl hover:shadow-amber-400/30 hover:-translate-y-1 transition-all duration-300">
               {t("hero_cta_projects")} <ArrowRight size={18} />
             </a>
-            <a href="#contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-transparent text-[#F5F0E0] font-semibold border border-[#2A2A1E] hover:bg-[#141410] hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300">
+            <a href="#contact" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-transparent text-[#F5F0E0] font-semibold border border-[#2A2A1E] hover:bg-[#141410] hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300">
               {t("hero_cta_contact")}
             </a>
-            <a href={`${BASE_URL}/pitch-reel`} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-lime-400/10 text-lime-400 font-semibold border border-lime-400/20 hover:bg-lime-400/20 hover:-translate-y-1 transition-all duration-300 text-sm">
-              {t("hero_cta_reel")}
-            </a>
+
+            {/* Divider */}
+            <div className="h-8 w-px bg-[#2A2A1E] hidden sm:block" />
+
+            {/* Find me on */}
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#9A9A80] hidden sm:block">{t("hero_find")}</span>
+            {[
+              { href: "https://github.com/NourKa5", Icon: Github, hover: "hover:bg-[#F5F0E0] hover:border-[#F5F0E0] hover:text-[#0B0B08]", title: "GitHub" },
+              { href: "https://linkedin.com/in/nour-karawani", Icon: Linkedin, hover: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white", title: "LinkedIn" },
+              { href: "mailto:noormich@post.bgu.ac.il", Icon: Mail, hover: "hover:bg-amber-400 hover:border-amber-400 hover:text-[#0B0B08]", title: "Email" },
+            ].map(({ href, Icon, hover, title }, i) => (
+              <motion.a key={i} href={href} target={href.startsWith("mailto") ? undefined : "_blank"} rel="noopener noreferrer" title={title}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ type: "spring", stiffness: 300, delay: 1.3 + i * 0.1 }}
+                whileHover={{ scale: 1.15 }}
+                className={`w-10 h-10 flex items-center justify-center rounded-full bg-[#141410] border border-[#2A2A1E] text-[#9A9A80] ${hover} transition-all duration-300`}>
+                <Icon size={18} />
+              </motion.a>
+            ))}
           </motion.div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <StatCard labelKey="hero_stat1_label" valKey="hero_stat1_val" delay={1.3} />
             <StatCard labelKey="hero_stat2_label" valKey="hero_stat2_val" delay={1.4} />
             <StatCard labelKey="hero_stat3_label" valKey="hero_stat3_val" delay={1.5} />
             <StatCard labelKey="hero_stat4_label" valKey="hero_stat4_val" delay={1.6} />
           </div>
-
-          {/* Social links */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 1.7 }}
-            className="flex items-center gap-4">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#9A9A80]">{t("hero_find")}</span>
-            <div className="h-px w-8 bg-[#2A2A1E]" />
-            <div className="flex items-center gap-3">
-              {[
-                { href: "https://github.com/NourKa5", Icon: Github, hover: "hover:bg-[#F5F0E0] hover:border-[#F5F0E0] hover:text-[#0B0B08]", title: "GitHub" },
-                { href: "https://linkedin.com/in/nour-karawani", Icon: Linkedin, hover: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white", title: "LinkedIn" },
-                { href: "mailto:noormich@post.bgu.ac.il", Icon: Mail, hover: "hover:bg-amber-400 hover:border-amber-400 hover:text-[#0B0B08]", title: "Email" },
-              ].map(({ href, Icon, hover, title }, i) => (
-                <motion.a key={i} href={href} target={href.startsWith("mailto") ? undefined : "_blank"} rel="noopener noreferrer" title={title}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 300, delay: 1.8 + i * 0.1 }}
-                  whileHover={{ scale: 1.15 }}
-                  className={`w-11 h-11 flex items-center justify-center rounded-full bg-[#141410] border border-[#2A2A1E] text-[#9A9A80] ${hover} transition-all duration-300`}>
-                  <Icon size={20} />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
         </div>
 
         {/* Code card */}
