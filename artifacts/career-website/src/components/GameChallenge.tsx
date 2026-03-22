@@ -198,109 +198,105 @@ const ACHIEVEMENTS = [
 type AppState = "menu" | "quiz" | "photon";
 type QuizState = "idle" | "playing" | "answer" | "finished";
 
-interface PhotonObj {
+interface FallingPhoton {
   id: number;
   x: number;
-  y: number;
-  color: string;
+  colorIdx: number;
   achievementIdx: number;
-  speed: number;
+  duration: number;
 }
 
 // ─── PHOTON CATCHER ───────────────────────────────────────────────────────────
 
 const PHOTON_COLORS = [
-  { bg: "bg-amber-400", glow: "shadow-amber-400/60", border: "border-amber-400" },
-  { bg: "bg-lime-400", glow: "shadow-lime-400/60", border: "border-lime-400" },
-  { bg: "bg-violet-400", glow: "shadow-violet-400/60", border: "border-violet-400" },
-  { bg: "bg-cyan-400", glow: "shadow-cyan-400/60", border: "border-cyan-400" },
+  { bg: "bg-amber-400", shadow: "shadow-amber-400/70" },
+  { bg: "bg-lime-400", shadow: "shadow-lime-400/70" },
+  { bg: "bg-violet-400", shadow: "shadow-violet-400/70" },
+  { bg: "bg-cyan-400", shadow: "shadow-cyan-400/70" },
+  { bg: "bg-orange-400", shadow: "shadow-orange-400/70" },
 ];
 
 function PhotonCatcher({ onBack }: { onBack: () => void }) {
-  const [timeLeft, setTimeLeft] = useState(35);
+  const GAME_DURATION = 40;
+  const FALL_HEIGHT = 380;
+
+  const [timeLeft, setTimeLeft] = useState(GAME_DURATION);
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
-  const [photons, setPhotons] = useState<PhotonObj[]>([]);
-  const [caught, setCaught] = useState<{ achievement: (typeof ACHIEVEMENTS)[0]; id: number }[]>([]);
-  const [activePopup, setActivePopup] = useState<(typeof ACHIEVEMENTS)[0] | null>(null);
+  const [photons, setPhotons] = useState<FallingPhoton[]>([]);
+  const [caught, setCaught] = useState<(typeof ACHIEVEMENTS)[0][]>([]);
+  const [missed, setMissed] = useState(0);
   const [score, setScore] = useState(0);
-  const [usedAchievements, setUsedAchievements] = useState<number[]>([]);
+  const [popup, setPopup] = useState<(typeof ACHIEVEMENTS)[0] | null>(null);
+  const usedIdx = useRef<number[]>([]);
   const nextId = useRef(0);
   const popupTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const timeRef = useRef(GAME_DURATION);
 
-  const spawnPhoton = useCallback((used: number[]) => {
-    const remaining = ACHIEVEMENTS.map((_, i) => i).filter((i) => !used.includes(i));
-    if (remaining.length === 0) return null;
+  const spawnOne = useCallback(() => {
+    const remaining = ACHIEVEMENTS.map((_, i) => i).filter((i) => !usedIdx.current.includes(i));
+    if (remaining.length === 0) return;
     const achievementIdx = remaining[Math.floor(Math.random() * remaining.length)];
-    const colorIdx = Math.floor(Math.random() * PHOTON_COLORS.length);
-    const photon: PhotonObj = {
+    usedIdx.current = [...usedIdx.current, achievementIdx];
+    const photon: FallingPhoton = {
       id: nextId.current++,
-      x: 5 + Math.random() * 85,
-      y: 5 + Math.random() * 80,
-      color: colorIdx.toString(),
+      x: 6 + Math.random() * 78,
+      colorIdx: Math.floor(Math.random() * PHOTON_COLORS.length),
       achievementIdx,
-      speed: 7 + Math.random() * 5,
+      duration: 2.8 + Math.random() * 2,
     };
-    return { photon, achievementIdx };
+    setPhotons((prev) => (prev.length >= 5 ? prev : [...prev, photon]));
   }, []);
 
   useEffect(() => {
     if (!started || finished) return;
-    if (timeLeft <= 0) {
-      setFinished(true);
-      return;
-    }
-    const t = setInterval(() => setTimeLeft((s) => s - 1), 1000);
+    const t = setInterval(() => {
+      setTimeLeft((s) => {
+        timeRef.current = s - 1;
+        if (s <= 1) { setFinished(true); return 0; }
+        return s - 1;
+      });
+    }, 1000);
     return () => clearInterval(t);
-  }, [started, finished, timeLeft]);
+  }, [started, finished]);
 
   useEffect(() => {
     if (!started || finished) return;
-    const spawnInterval = setInterval(() => {
-      setPhotons((prev) => {
-        if (prev.length >= 5) return prev;
-        setUsedAchievements((used) => {
-          const result = spawnPhoton(used);
-          if (!result) return used;
-          setPhotons((p) => [...p, result.photon]);
-          return [...used, result.achievementIdx];
-        });
-        return prev;
-      });
-    }, 1800);
-    return () => clearInterval(spawnInterval);
-  }, [started, finished, spawnPhoton]);
+    const iv = setInterval(spawnOne, 1300);
+    return () => clearInterval(iv);
+  }, [started, finished, spawnOne]);
 
   const startGame = () => {
+    usedIdx.current = [];
+    nextId.current = 0;
     setStarted(true);
     setFinished(false);
-    setTimeLeft(35);
+    setTimeLeft(GAME_DURATION);
+    timeRef.current = GAME_DURATION;
     setScore(0);
     setCaught([]);
-    setUsedAchievements([]);
+    setMissed(0);
     setPhotons([]);
-    nextId.current = 0;
-    setTimeout(() => {
-      setUsedAchievements((used) => {
-        const result = spawnPhoton(used);
-        if (!result) return used;
-        setPhotons((p) => [...p, result.photon]);
-        return [...used, result.achievementIdx];
-      });
-    }, 300);
+    setPopup(null);
+    setTimeout(spawnOne, 200);
+    setTimeout(spawnOne, 900);
   };
 
-  const catchPhoton = (photon: PhotonObj) => {
-    const achievement = ACHIEVEMENTS[photon.achievementIdx];
-    setPhotons((p) => p.filter((ph) => ph.id !== photon.id));
-    setScore((s) => s + 150 + Math.floor(timeLeft * 2));
-    setCaught((c) => [...c, { achievement, id: photon.id }]);
-    setActivePopup(achievement);
+  const catchPhoton = useCallback((id: number, achievementIdx: number) => {
+    setPhotons((prev) => prev.filter((p) => p.id !== id));
+    const bonus = 100 + timeRef.current * 3;
+    setScore((s) => s + bonus);
+    const ach = ACHIEVEMENTS[achievementIdx];
+    setCaught((c) => [...c, ach]);
+    setPopup(ach);
     clearTimeout(popupTimeout.current);
-    popupTimeout.current = setTimeout(() => setActivePopup(null), 5500);
-  };
+    popupTimeout.current = setTimeout(() => setPopup(null), 5000);
+  }, []);
 
-  const colorCls = (colorStr: string) => PHOTON_COLORS[parseInt(colorStr)] || PHOTON_COLORS[0];
+  const missPhoton = useCallback((id: number) => {
+    setPhotons((prev) => prev.filter((p) => p.id !== id));
+    setMissed((m) => m + 1);
+  }, []);
 
   if (!started) {
     return (
@@ -314,10 +310,10 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
         </div>
         <h3 className="text-2xl font-bold text-[#F5F0E0] mb-2">Catch the Photons!</h3>
         <p className="text-[#9A9A80] mb-6 text-sm leading-relaxed max-w-sm mx-auto">
-          Photons are flying — each one carries a hidden achievement from Nour's journey. Catch as many as you can in 35 seconds!
+          Photons fall from the top — click them before they escape! Each catch reveals a real achievement from Nour's journey.
         </p>
         <div className="flex justify-center gap-3 mb-8 flex-wrap">
-          {["🔬 Real Research", "🤖 Automation", "💻 Full-Stack", "🌍 Global Ready"].map((tag) => (
+          {["⬇️ Click falling photons", "🏆 Unlock achievements", "⏱ 40 seconds", "🎯 Don't miss!"].map((tag) => (
             <span key={tag} className="px-3 py-1.5 bg-lime-400/10 text-lime-400 text-xs font-semibold rounded-full border border-lime-400/20">{tag}</span>
           ))}
         </div>
@@ -328,7 +324,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
             onClick={startGame}
             className="px-10 py-4 bg-lime-400 text-[#0B0B08] font-bold text-lg rounded-2xl shadow-lg shadow-lime-400/20 hover:bg-lime-300 transition-colors"
           >
-            Launch Photons ⚛️
+            Start! ⚛️
           </motion.button>
           <button onClick={onBack} className="px-6 py-4 text-[#9A9A80] hover:text-[#F5F0E0] font-semibold rounded-2xl border border-[#2A2A1E] transition-colors text-sm">
             ← Back
@@ -348,15 +344,15 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
         <div className="text-5xl mb-3">⚛️</div>
         <h3 className="text-2xl font-bold text-lime-400 mb-1">Photon Hunt Complete!</h3>
         <div className="text-5xl font-black text-[#F5F0E0] my-3">{score}</div>
-        <p className="text-[#9A9A80] mb-5">{caught.length} achievements unlocked</p>
+        <p className="text-[#9A9A80] mb-5">{caught.length} caught · {missed} missed</p>
         {caught.length > 0 && (
           <div className="text-left bg-[#1E1E18] rounded-2xl border border-[#2A2A1E] p-4 mb-5 max-h-52 overflow-y-auto space-y-2">
-            {caught.map(({ achievement, id }) => (
-              <div key={id} className="flex items-start gap-3">
-                <span className="text-xl flex-shrink-0">{achievement.emoji}</span>
+            {caught.map((ach, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="text-xl flex-shrink-0">{ach.emoji}</span>
                 <div>
-                  <p className="text-xs font-bold text-lime-400">{achievement.title}</p>
-                  <p className="text-xs text-[#9A9A80] leading-snug">{achievement.fact}</p>
+                  <p className="text-xs font-bold text-lime-400">{ach.title}</p>
+                  <p className="text-xs text-[#9A9A80] leading-snug">{ach.fact}</p>
                 </div>
               </div>
             ))}
@@ -372,7 +368,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
         </div>
         <div className="flex gap-3 justify-center">
           <button onClick={startGame} className="flex items-center gap-2 text-[#9A9A80] hover:text-lime-400 font-semibold transition-colors text-sm">
-            <RotateCcw size={14} />Play Again
+            <RotateCcw size={14} /> Play Again
           </button>
           <button onClick={onBack} className="flex items-center gap-2 text-[#9A9A80] hover:text-[#F5F0E0] font-semibold transition-colors text-sm">
             ← Change Mode
@@ -384,72 +380,70 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
 
   return (
     <div className="bg-[#141410] rounded-3xl border border-[#2A2A1E] shadow-xl overflow-hidden">
-      <div className="px-6 pt-5 pb-4 border-b border-[#2A2A1E] flex items-center justify-between">
+      {/* Header */}
+      <div className="px-6 pt-4 pb-3 border-b border-[#2A2A1E] flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Atom size={16} className="text-lime-400" />
           <span className="text-sm font-bold text-lime-400">Photon Hunt</span>
         </div>
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1 text-sm font-semibold text-lime-400">
+        <div className="flex items-center gap-5">
+          <span className="flex items-center gap-1 text-sm font-bold text-lime-400">
             <Zap size={14} />{score} pts
           </span>
-          <div className={`flex items-center gap-1 text-sm font-bold ${timeLeft <= 8 ? "text-red-400" : "text-[#9A9A80]"}`}>
+          <span className="text-[#2A2A1E]">|</span>
+          <span className="text-xs text-[#9A9A80]">{caught.length} caught</span>
+          <span className="text-[#2A2A1E]">|</span>
+          <div className={`flex items-center gap-1 text-sm font-bold ${timeLeft <= 8 ? "text-red-400 animate-pulse" : "text-[#9A9A80]"}`}>
             <Clock size={14} />{timeLeft}s
           </div>
         </div>
       </div>
-      <div className="px-4 py-2 border-b border-[#2A2A1E]">
-        <div className="h-1.5 bg-[#2A2A1E] rounded-full overflow-hidden">
-          <motion.div
-            className={`h-full rounded-full transition-colors ${timeLeft <= 8 ? "bg-red-400" : "bg-lime-400"}`}
-            animate={{ width: `${(timeLeft / 35) * 100}%` }}
-            transition={{ duration: 0.5 }}
-          />
-        </div>
+
+      {/* Timer bar */}
+      <div className="h-1 bg-[#2A2A1E]">
+        <motion.div
+          className={`h-full ${timeLeft <= 8 ? "bg-red-400" : "bg-lime-400"}`}
+          animate={{ width: `${(timeLeft / GAME_DURATION) * 100}%` }}
+          transition={{ duration: 0.8, ease: "linear" }}
+        />
       </div>
 
-      <div className="relative bg-[#0E0E0B] overflow-hidden" style={{ height: 340 }}>
+      {/* Fall zone */}
+      <div className="relative bg-[#0A0A08] overflow-hidden select-none" style={{ height: FALL_HEIGHT }}>
+        {/* Background symbols */}
         <div className="absolute inset-0 pointer-events-none">
-          {["hν", "λ", "E=hf", "Δν", "σ_SERS"].map((sym, i) => (
-            <motion.span
+          {["hν", "λ", "E=hf", "Δν", "σ"].map((sym, i) => (
+            <span
               key={sym}
-              className="absolute text-[#1A1A14] font-mono text-sm font-bold select-none"
-              style={{ left: `${8 + i * 20}%`, top: `${20 + (i % 3) * 25}%` }}
-              animate={{ y: [0, -10, 0], opacity: [0.4, 0.8, 0.4] }}
-              transition={{ duration: 3 + i * 0.6, repeat: Infinity, delay: i * 0.5 }}
-            >
-              {sym}
-            </motion.span>
+              className="absolute font-mono text-xs text-[#1C1C14] select-none"
+              style={{ left: `${10 + i * 20}%`, top: `${15 + (i % 3) * 28}%` }}
+            >{sym}</span>
           ))}
         </div>
 
+        {/* "Catch zone" bottom line */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-red-500/30 to-transparent pointer-events-none" />
+        <div className="absolute bottom-1 left-0 right-0 text-center pointer-events-none">
+          <span className="text-[10px] text-red-400/40 font-mono">— ESCAPE ZONE —</span>
+        </div>
+
+        {/* Falling photons */}
         <AnimatePresence>
           {photons.map((photon) => {
-            const c = colorCls(photon.color);
-            const tx1 = 5 + Math.random() * 80;
-            const ty1 = 5 + Math.random() * 75;
+            const c = PHOTON_COLORS[photon.colorIdx];
             return (
               <motion.button
                 key={photon.id}
-                className={`absolute w-16 h-16 rounded-full ${c.bg} shadow-lg ${c.glow} flex items-center justify-center text-2xl font-bold text-[#0B0B08] cursor-pointer border-2 ${c.border} select-none`}
-                style={{ left: `${photon.x}%`, top: `${photon.y}%` }}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{
-                  scale: [1, 1.08, 1],
-                  opacity: 1,
-                  left: [`${photon.x}%`, `${tx1}%`, `${5 + Math.random() * 80}%`],
-                  top: [`${photon.y}%`, `${ty1}%`, `${5 + Math.random() * 75}%`],
-                }}
-                exit={{ scale: 2, opacity: 0 }}
-                transition={{
-                  scale: { duration: 1.2, repeat: Infinity },
-                  opacity: { duration: 0.3 },
-                  left: { duration: photon.speed, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
-                  top: { duration: photon.speed * 0.8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
-                }}
-                onClick={() => catchPhoton(photon)}
-                whileHover={{ scale: 1.25 }}
-                whileTap={{ scale: 0.8 }}
+                className={`absolute w-14 h-14 rounded-full ${c.bg} ${c.shadow} shadow-xl flex items-center justify-center text-xl font-bold text-[#0B0B08] cursor-pointer select-none z-10`}
+                style={{ left: `${photon.x}%`, marginLeft: -28, top: 0 }}
+                initial={{ y: -70, scale: 0.6, opacity: 0 }}
+                animate={{ y: FALL_HEIGHT + 20, scale: 1, opacity: 1 }}
+                exit={{ scale: 2.5, opacity: 0, transition: { duration: 0.25 } }}
+                transition={{ duration: photon.duration, ease: "easeIn", opacity: { duration: 0.2, delay: 0 } }}
+                onAnimationComplete={() => missPhoton(photon.id)}
+                onClick={(e) => { e.stopPropagation(); catchPhoton(photon.id, photon.achievementIdx); }}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.75 }}
               >
                 ⚛
               </motion.button>
@@ -457,36 +451,44 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
           })}
         </AnimatePresence>
 
-        <AnimatePresence>
-          {activePopup && (
-            <motion.div
-              key={activePopup.title}
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              className="absolute bottom-3 left-3 right-3 bg-[#141410]/95 backdrop-blur border border-lime-400/30 rounded-2xl p-4 z-10"
-            >
-              <div className="flex items-start gap-3">
-                <span className="text-2xl flex-shrink-0">{activePopup.emoji}</span>
-                <div>
-                  <p className="text-xs font-bold text-lime-400 mb-0.5">Achievement Unlocked: {activePopup.title}</p>
-                  <p className="text-xs text-[#9A9A80] leading-snug">{activePopup.fact}</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {photons.length === 0 && !activePopup && (
+        {photons.length === 0 && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <p className="text-[#2A2A1E] text-sm font-semibold animate-pulse">Photons incoming...</p>
+            <p className="text-[#2A2A1E] text-sm font-mono animate-pulse">incoming...</p>
           </div>
         )}
       </div>
 
-      <div className="px-6 py-3 border-t border-[#2A2A1E] flex items-center justify-between">
-        <span className="text-xs text-[#9A9A80]">{caught.length} caught · tap photons to unlock achievements</span>
-        <button onClick={onBack} className="text-xs text-[#9A9A80] hover:text-[#F5F0E0] transition-colors">← modes</button>
+      {/* Achievement popup — below the fall zone, never blocks gameplay */}
+      <div className="min-h-[68px] border-t border-[#2A2A1E] bg-[#0D0D0B]">
+        <AnimatePresence mode="wait">
+          {popup ? (
+            <motion.div
+              key={popup.title}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+              className="px-4 py-3 flex items-start gap-3"
+            >
+              <span className="text-2xl flex-shrink-0 mt-0.5">{popup.emoji}</span>
+              <div>
+                <p className="text-xs font-bold text-lime-400 mb-0.5">🏆 {popup.title}</p>
+                <p className="text-xs text-[#9A9A80] leading-snug">{popup.fact}</p>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="hint"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="px-5 py-3 flex items-center justify-between"
+            >
+              <span className="text-xs text-[#3A3A2E]">Click photons before they reach the red line</span>
+              <button onClick={onBack} className="text-xs text-[#3A3A2E] hover:text-[#9A9A80] transition-colors ml-4 flex-shrink-0">← modes</button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
