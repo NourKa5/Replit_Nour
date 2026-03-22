@@ -149,8 +149,8 @@ export function AiAssistant() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1.5, type: "spring", stiffness: 300 }}
-        onClick={() => setOpen((o) => !o)}
-        className={`fixed bottom-6 right-6 z-[70] w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-all ${open ? "bg-[#2A2A1E] text-[#F5F0E0] shadow-black/40 hover:bg-[#3A3A28]" : "bg-amber-400 text-[#0B0B08] shadow-amber-400/30 hover:bg-amber-300"}`}
+        onClick={() => setOpen(true)}
+        className="fixed bottom-6 right-6 z-[70] w-14 h-14 bg-amber-400 text-[#0B0B08] rounded-full shadow-2xl shadow-amber-400/30 flex items-center justify-center hover:scale-110 hover:bg-amber-300 transition-all"
         aria-label="Open AI Assistant"
       >
         <MessageCircle size={24} />
@@ -179,23 +179,24 @@ export function AiAssistant() {
               />
             </div>
 
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 bg-[#1E1E18] border-b border-[#2A2A1E] flex-shrink-0">
+            {/* Header — click anywhere to close */}
+            <div
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between px-5 py-4 bg-[#1E1E18] border-b border-[#2A2A1E] flex-shrink-0 cursor-pointer hover:bg-[#252520] transition-colors group"
+              title="Click to close"
+            >
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-amber-400 text-[#0B0B08] flex items-center justify-center">
                   <Sparkles size={18} />
                 </div>
                 <div>
                   <p className="font-bold text-sm text-[#F5F0E0] leading-none">Nour's Assistant</p>
-                  <p className="text-[#9A9A80] text-xs mt-0.5">Ask me anything 🧪</p>
+                  <p className="text-[#9A9A80] text-xs mt-0.5 group-hover:text-amber-400/60 transition-colors">Click to close · Ask me anything 🧪</p>
                 </div>
               </div>
-              <button
-                onClick={() => setOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-[#2A2A1E] hover:bg-[#3A3A28] transition-colors text-[#9A9A80] hover:text-[#F5F0E0]"
-              >
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-[#2A2A1E] group-hover:bg-[#3A3A28] transition-colors text-[#9A9A80] group-hover:text-[#F5F0E0]">
                 <X size={16} />
-              </button>
+              </div>
             </div>
 
             {/* Messages */}
