@@ -16,7 +16,7 @@ export function Skills() {
       titleKey: "skill_cat2" as const,
       icon: Code2,
       color: "lime",
-      skills: ["Python", "SQL / MySQL", "MATLAB", "Excel Advanced", "PCA / PLS / PCR", "Signal Processing"]
+      skills: ["Python", "NumPy / Pandas", "Matplotlib / Seaborn", "SQL / MySQL", "MATLAB", "Excel Advanced", "PCA / PLS / PCR", "Signal Processing"]
     },
     {
       titleKey: "skill_cat3" as const,
@@ -28,7 +28,7 @@ export function Skills() {
       titleKey: "skill_cat4" as const,
       icon: Bot,
       color: "lime",
-      skills: ["Scikit-learn", "Random Forest / SVM / KNN", "GridSearchCV / KFold", "OpenAI API Integration", "Deep Learning"]
+      skills: ["Scikit-learn", "Random Forest / SVM / KNN", "GridSearchCV / KFold", "TensorFlow / Keras", "NLP / Text Processing", "OpenAI API Integration"]
     },
     {
       titleKey: "skill_cat5" as const,

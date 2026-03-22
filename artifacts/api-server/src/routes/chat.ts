@@ -56,9 +56,9 @@ Nour Karawani (he/him) is a Chemical Engineering graduate from Ben-Gurion Univer
 
 **Process & R&D:** PFD/P&ID design, mass & energy balances, chemical separation processes, experimental planning, SERS/Raman spectroscopy, analytical chemistry
 
-**Programming & Data:** Python, SQL, MATLAB, Excel (advanced, used for algorithm development); currently expanding into full-stack JavaScript/TypeScript, React, Node.js, PostgreSQL
+**Programming & Data:** Python (NumPy, Pandas, Matplotlib, Seaborn), SQL/MySQL, MATLAB, Excel (advanced); full-stack JavaScript/TypeScript, React, Node.js, PostgreSQL
 
-**AI/ML:** PCA, PLS, PCR, signal processing, pattern recognition, statistical data analysis, scikit-learn; exploring deep learning (CNNs may follow in current studies)
+**AI/ML:** PCA, PLS, PCR, signal processing, statistical data analysis, scikit-learn (Random Forest, SVM, KNN, GridSearchCV), TensorFlow/Keras (deep learning — CNN, RNN), NLP (text preprocessing, Named Entity Recognition), OpenAI API integration
 
 **Automation & Control:** PLCs (Siemens, Unitronics, Allen-Bradley), Ladder Logic, Cognex cameras, Yaskawa/UR robotics, IIoT, Arduino
 
@@ -82,7 +82,9 @@ Nour Karawani (he/him) is a Chemical Engineering graduate from Ben-Gurion Univer
 
 ## Target Roles
 
-Process Engineer | R&D Engineer | Application Engineer | Control Systems Engineer | Automation Engineer | Algorithm Developer | Data Analyst | Biomedical Engineer | V&V Engineer | Material Engineer | Chemical Engineer | Integration Engineer
+**Immediate focus (first job):** Process Engineer | R&D Engineer | Automation Engineer | V&V Engineer | Application Engineer | Algorithm Developer | Chemical Engineer | Integration Engineer
+
+**Long-term aspiration:** Data Analyst | Data Scientist | AI Developer — Nour is actively deepening his skills in Python data science and machine learning toward this future path
 
 ---
 
