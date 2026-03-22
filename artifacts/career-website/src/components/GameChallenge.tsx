@@ -239,7 +239,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
       y: 5 + Math.random() * 80,
       color: colorIdx.toString(),
       achievementIdx,
-      speed: 2.5 + Math.random() * 2,
+      speed: 7 + Math.random() * 5,
     };
     return { photon, achievementIdx };
   }, []);
@@ -297,7 +297,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
     setCaught((c) => [...c, { achievement, id: photon.id }]);
     setActivePopup(achievement);
     clearTimeout(popupTimeout.current);
-    popupTimeout.current = setTimeout(() => setActivePopup(null), 2800);
+    popupTimeout.current = setTimeout(() => setActivePopup(null), 5500);
   };
 
   const colorCls = (colorStr: string) => PHOTON_COLORS[parseInt(colorStr)] || PHOTON_COLORS[0];
@@ -431,7 +431,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
             return (
               <motion.button
                 key={photon.id}
-                className={`absolute w-12 h-12 rounded-full ${c.bg} shadow-lg ${c.glow} flex items-center justify-center text-lg font-bold text-[#0B0B08] cursor-pointer border-2 ${c.border} select-none`}
+                className={`absolute w-16 h-16 rounded-full ${c.bg} shadow-lg ${c.glow} flex items-center justify-center text-2xl font-bold text-[#0B0B08] cursor-pointer border-2 ${c.border} select-none`}
                 style={{ left: `${photon.x}%`, top: `${photon.y}%` }}
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{
