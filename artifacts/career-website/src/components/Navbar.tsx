@@ -43,7 +43,7 @@ export function Navbar() {
               <Terminal size={20} strokeWidth={2.5} />
             </div>
             <span className="font-display font-bold text-xl text-slate-900 tracking-tight">
-              Alex<span className="text-primary">Dev</span>
+              N<span className="text-primary">K</span>
             </span>
           </Link>
 

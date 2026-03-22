@@ -59,7 +59,7 @@ export function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-white">Let's Build Something</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-white">Let's Build Something Real.</h2>
           <div className="w-16 h-1.5 bg-primary mx-auto rounded-full"></div>
           <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">
             I'm actively seeking full-time opportunities. Whether you have a question or just want to say hi, my inbox is always open.
@@ -81,7 +81,7 @@ export function Contact() {
               </div>
               <div>
                 <h4 className="text-lg font-semibold text-slate-200">Email</h4>
-                <a href="mailto:hello@alexdev.com" className="text-slate-400 hover:text-white transition-colors">hello@alexdev.com</a>
+                <a href="mailto:noormich@post.bgu.ac.il" className="text-slate-400 hover:text-white transition-colors">noormich@post.bgu.ac.il</a>
               </div>
             </div>
             
@@ -91,7 +91,7 @@ export function Contact() {
               </div>
               <div>
                 <h4 className="text-lg font-semibold text-slate-200">Phone</h4>
-                <a href="tel:+1234567890" className="text-slate-400 hover:text-white transition-colors">+1 (555) 123-4567</a>
+                <a href="tel:+972587090443" className="text-slate-400 hover:text-white transition-colors">+972-58-709-0443</a>
               </div>
             </div>
             
@@ -101,7 +101,7 @@ export function Contact() {
               </div>
               <div>
                 <h4 className="text-lg font-semibold text-slate-200">Location</h4>
-                <p className="text-slate-400">San Francisco, CA (Open to Remote)</p>
+                <p className="text-slate-400">Israel (Open to Global Relocation)</p>
               </div>
             </div>
           </motion.div>

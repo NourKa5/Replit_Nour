@@ -1,22 +1,37 @@
 import { motion } from "framer-motion";
-import { Code2, Database, Layout, Server, Cloud, Cpu } from "lucide-react";
+import { FlaskConical, Code2, Cog, Bot, Rocket, PenTool } from "lucide-react";
 
 export function Skills() {
   const skillCategories = [
     {
-      title: "Frontend Development",
-      icon: Layout,
-      skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "Redux"]
+      title: "R&D & Process Engineering",
+      icon: FlaskConical,
+      skills: ["PFD / P&ID Design", "Mass & Energy Balances", "ChemCAD", "SERS / Raman Analysis", "Water Treatment"]
     },
     {
-      title: "Backend Engineering",
-      icon: Server,
-      skills: ["Node.js", "Express", "Python", "PostgreSQL", "MongoDB", "REST APIs"]
+      title: "Programming & Data",
+      icon: Code2,
+      skills: ["Python", "SQL / MySQL", "MATLAB", "PCA / PLS / PCR", "Signal Processing"]
     },
     {
-      title: "Tools & Infrastructure",
-      icon: Cloud,
-      skills: ["Git & GitHub", "Docker", "AWS", "CI/CD", "Jest", "Linux"]
+      title: "Automation & Industry 4.0",
+      icon: Cog,
+      skills: ["Siemens / Allen-Bradley PLC", "Ladder Logic / VisiLogic", "Yaskawa / UR Robotics", "Cognex Machine Vision", "Arduino / IIoT"]
+    },
+    {
+      title: "AI & Machine Learning",
+      icon: Bot,
+      skills: ["Scikit-learn", "Random Forest / SVM / KNN", "GridSearchCV / KFold", "OpenAI API Integration", "Deep Learning"]
+    },
+    {
+      title: "Backend & DevOps",
+      icon: Rocket,
+      skills: ["FastAPI / REST APIs", "Redis Caching", "Docker / Compose", "Microservices", "GitHub / Vercel CI/CD"]
+    },
+    {
+      title: "Engineering Tools",
+      icon: PenTool,
+      skills: ["SolidWorks / 3D Printing", "Scientific Writing", "SQLAlchemy / Pydantic", "Streamlit", "Excel Advanced"]
     }
   ];
 
@@ -45,7 +60,7 @@ export function Skills() {
           <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-4">Technical Skills</h2>
           <div className="w-16 h-1.5 bg-primary mx-auto rounded-full"></div>
           <p className="mt-6 text-lg text-slate-600 max-w-2xl mx-auto">
-            A comprehensive toolkit acquired through rigorous academic coursework and hands-on personal projects.
+            A comprehensive toolkit combining chemical engineering, industrial automation, and modern software development.
           </p>
         </motion.div>
 
@@ -54,7 +69,7 @@ export function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {skillCategories.map((category, i) => (
             <motion.div
