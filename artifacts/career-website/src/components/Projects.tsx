@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, FileDown } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 
 export function Projects() {
@@ -10,9 +10,10 @@ export function Projects() {
       titleKey: "proj1_title" as const,
       descKey: "proj1_desc" as const,
       image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=500&fit=crop",
-      tags: ["Python", "PCA/PLS", "Signal Processing", "SERS"],
+      tags: ["Python", "PCA/PLS/PCR", "SERS", "Signal Processing", "Min-Max Norm"],
       github: "https://github.com/NourKa5",
       live: null,
+      pdf: null,
       categoryLabel: "R&D · Under Review",
     },
     {
@@ -22,6 +23,7 @@ export function Projects() {
       tags: ["PLC/VisiLogic", "Yaskawa", "Cognex", "SolidWorks"],
       github: null,
       live: "https://www.linkedin.com/feed/update/urn:li:activity:7295779986119008259/",
+      pdf: null,
       categoryLabel: "Automation · Industry 4.0",
     },
     {
@@ -30,7 +32,8 @@ export function Projects() {
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop",
       tags: ["JavaScript", "OpenAI API", "Vercel", "Arabic RTL"],
       github: "https://github.com/NourKa5/Artboxnat",
-      live: null,
+      live: "https://artboxnat.vercel.app/#",
+      pdf: null,
       categoryLabel: "Full-Stack · AI",
     },
     {
@@ -40,6 +43,7 @@ export function Projects() {
       tags: ["FastAPI", "MySQL", "Redis", "OpenAI GPT", "Docker"],
       github: "https://github.com/NourKa5",
       live: null,
+      pdf: null,
       categoryLabel: "Full-Stack · AI · Ecom School",
     },
     {
@@ -49,6 +53,7 @@ export function Projects() {
       tags: ["FastAPI", "Microservices", "MySQL", "Docker", "httpx"],
       github: "https://github.com/NourKa5",
       live: null,
+      pdf: null,
       categoryLabel: "Backend · Microservices",
     },
     {
@@ -58,7 +63,28 @@ export function Projects() {
       tags: ["Scikit-learn", "GridSearchCV", "KFold CV", "Random Forest", "SVM"],
       github: "https://github.com/NourKa5",
       live: null,
+      pdf: null,
       categoryLabel: "Machine Learning · Top-tier",
+    },
+    {
+      titleKey: "proj7_title" as const,
+      descKey: "proj7_desc" as const,
+      image: "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&h=500&fit=crop",
+      tags: ["whatsapp-web.js", "GPT-4o", "Node.js", "dotenv"],
+      github: "https://github.com/NourKa5",
+      live: null,
+      pdf: null,
+      categoryLabel: "AI · Automation",
+    },
+    {
+      titleKey: "proj8_title" as const,
+      descKey: "proj8_desc" as const,
+      image: "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?w=800&h=500&fit=crop",
+      tags: ["ChemCAD", "P&ID Design", "PFD", "H₂SO₄ Leaching", "Process Control"],
+      github: null,
+      live: null,
+      pdf: "/Nickel_Recovery_Report.pdf",
+      categoryLabel: "Chemical Eng. · Sustainability",
     },
   ];
 
@@ -75,7 +101,7 @@ export function Projects() {
           {projects.map((project, i) => (
             <motion.div key={i}
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
               className="group bg-[#141410] rounded-2xl overflow-hidden border border-[#2A2A1E] hover:border-amber-400/30 hover:shadow-2xl hover:shadow-amber-400/5 transition-all duration-500 flex flex-col"
             >
               <div className="relative h-56 overflow-hidden">
@@ -96,10 +122,15 @@ export function Projects() {
                     <span key={j} className="text-xs font-semibold text-lime-400 bg-lime-400/10 px-2.5 py-1 rounded-md border border-lime-400/20">{tag}</span>
                   ))}
                 </div>
-                <div className="flex items-center gap-4 pt-4 border-t border-[#2A2A1E]">
+                <div className="flex items-center gap-4 pt-4 border-t border-[#2A2A1E] flex-wrap">
                   {project.github && (
                     <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm font-semibold text-[#9A9A80] hover:text-[#F5F0E0] transition-colors">
                       <Github size={16} /> {t("proj_code")}
+                    </a>
+                  )}
+                  {project.pdf && (
+                    <a href={project.pdf} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm font-semibold text-lime-400 hover:text-lime-300 transition-colors">
+                      <FileDown size={16} /> Report PDF
                     </a>
                   )}
                   {project.live && (

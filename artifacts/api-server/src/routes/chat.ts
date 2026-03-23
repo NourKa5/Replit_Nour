@@ -16,7 +16,7 @@ Nour Karawani (he/him) is a Chemical Engineering graduate from Ben-Gurion Univer
 **R&D Algorithm Developer & Data Analyst — Atiko Labs** (Jun 2023 – Nov 2025, 2.5 years)
 - Developed and optimized signal processing, statistical data analysis, and pattern recognition algorithms for Surface-Enhanced Raman Spectroscopy (SERS) analysis
 - Used Excel for initial algorithm prototyping and statistical coding; now fully migrated to Python
-- Improved signal-to-noise ratio to <2% and enabled trace-level detection down to 1 µM in complex media (e.g., blood)
+- Achieved NSR (Noise-to-Signal Ratio) <2% — meaning noise is less than 2% of the signal, an excellent result that enabled trace-level detection down to 1 µM in complex media (e.g., blood). IMPORTANT: this is NSR not SNR — lower is better here
 - Applied PCA, PLS, PCR for dimensionality reduction and spectral analysis
 - Delivered real-time, on-site diagnostics for non-invasive early detection
 - Contributed to peer-reviewed research; paper currently under review: "RamanSense: An Adaptive Algorithm for Enhanced SERS Analysis" (co-authored with Prof. Muhammad Y. Bashouti)
@@ -70,13 +70,15 @@ Nour Karawani (he/him) is a Chemical Engineering graduate from Ben-Gurion Univer
 
 ## Projects
 
-1. 🔬 **RamanSense** — Adaptive SERS algorithm; automated molecule ID; SNR <2%; 1 µM detection; publication under review
+1. 🔬 **RamanSense** — Adaptive SERS algorithm built at Atiko Labs. Preprocessing pipeline: ROI selection → iterative moving-average noise reduction → moving-median baseline subtraction → Min-Max normalization → Spectrum Profile (SP) comparison. NSR <2% (noise-to-signal ratio — noise is less than 2% of signal = excellent). Detected 4-ATP at 1 µM in blood. PCA/PLS/PCR for dimensionality reduction. Paper under peer review: "RamanSense: An Adaptive Algorithm for Enhanced SERS Analysis" (co-author: Prof. Muhammad Y. Bashouti).
 2. 🤖 **Automated Box-Sorting System** — PLC + Yaskawa robotics + Cognex machine vision (Moona)
-3. 🛒 **artboxnat** — Arabic RTL e-commerce platform with OpenAI chat assistant, deployed on Vercel
+3. 🛒 **artboxnat** — Arabic RTL e-commerce platform with OpenAI chat assistant, deployed on Vercel. Live at: artboxnat.vercel.app
 4. 🛍️ **ShopAI** — Full-stack platform with GPT chat, Redis caching, JWT auth, Random Forest churn ML
 5. 🗳️ **Polls System** — Microservices backend with FastAPI + MySQL + Docker
 6. 📊 **Supervised Learning Project** — GDP regression + churn classification; graded "one of the best seen"
-7. 💻 **This Portfolio Website** — React + Vite + Express + PostgreSQL, fully built by Nour
+7. 📱 **WhatsApp AI Bot** — Personal WhatsApp bot replying as Nour using GPT-4o; mimics his writing style; handles Arabic + English + code-switching; includes typing indicators, human-like delays (1.5–4 s), conversation memory, and QR session persistence. Stack: whatsapp-web.js, OpenAI GPT-4o, Node.js, dotenv.
+8. 🧪 **Nickel Recovery from Ni-MH Batteries** — Final-year Chemical Engineering project at BGU. Full process design for Ni recovery via H₂SO₄ leaching: PFD, P&ID, equipment specs, block diagram, mass & energy balances, process control. Supervisor: Mr. Ronen Berman, RTA Engineering LTD. Full report PDF available on website.
+9. 💻 **This Portfolio Website** — React + Vite + Express + PostgreSQL, fully built by Nour
 
 ---
 
