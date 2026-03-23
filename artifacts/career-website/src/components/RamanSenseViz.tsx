@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Github } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 function buildPath(noisy: boolean): string {
   const pts: string[] = [];
@@ -23,22 +24,6 @@ function buildPath(noisy: boolean): string {
 const NOISY_PATH = buildPath(true);
 const CLEAN_PATH = buildPath(false);
 
-const PIPELINE = [
-  { icon: "🩸", label: "Blood Sample", sub: "Complex media" },
-  { icon: "⚡", label: "SERS Laser", sub: "Nano-sensor" },
-  { icon: "📡", label: "Raw Spectrum", sub: "Noisy signal" },
-  { icon: "🧠", label: "RamanSense", sub: "Pattern recognition" },
-  { icon: "✅", label: "Detected!", sub: "4-ATP @ 1 µM" },
-];
-
-const ALGO_STEPS = [
-  "1. ROI Selection",
-  "2. Moving-Avg Denoising",
-  "3. Median Baseline Removal",
-  "4. Min-Max Normalisation",
-  "5. Spectrum Profile Match",
-];
-
 const PEAK_LABELS = [
   { x: 112, label: "1080 cm⁻¹" },
   { x: 236, label: "1390 cm⁻¹" },
@@ -46,8 +31,25 @@ const PEAK_LABELS = [
 ];
 
 export function RamanSenseViz() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  const PIPELINE = [
+    { icon: "🩸", label: t("viz_step1_label"), sub: t("viz_step1_sub") },
+    { icon: "⚡", label: t("viz_step2_label"), sub: t("viz_step2_sub") },
+    { icon: "📡", label: t("viz_step3_label"), sub: t("viz_step3_sub") },
+    { icon: "🧠", label: t("viz_step4_label"), sub: t("viz_step4_sub") },
+    { icon: "✅", label: t("viz_step5_label"), sub: t("viz_step5_sub") },
+  ];
+
+  const ALGO_STEPS = [
+    t("viz_algo_1"),
+    t("viz_algo_2"),
+    t("viz_algo_3"),
+    t("viz_algo_4"),
+    t("viz_algo_5"),
+  ];
 
   return (
     <motion.div
@@ -60,8 +62,8 @@ export function RamanSenseViz() {
       {/* Top badge bar */}
       <div className="flex items-center gap-3 px-6 py-3 bg-amber-400/5 border-b border-amber-400/15">
         <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-        <span className="text-amber-400 text-xs font-bold tracking-widest uppercase">Research Spotlight</span>
-        <span className="text-[#9A9A80] text-xs">· Atiko Labs · 2023–2025 · Paper Under Peer Review</span>
+        <span className="text-amber-400 text-xs font-bold tracking-widest uppercase">{t("viz_badge")}</span>
+        <span className="text-[#9A9A80] text-xs">· {t("viz_badge_sub")}</span>
       </div>
 
       <div className="p-6 grid lg:grid-cols-5 gap-8">
@@ -69,13 +71,19 @@ export function RamanSenseViz() {
         <div className="lg:col-span-2 flex flex-col justify-center gap-5">
           <div>
             <h3 className="text-2xl font-bold text-[#F5F0E0] mb-1">RamanSense</h3>
-            <p className="text-amber-400 text-sm font-semibold">Adaptive SERS Detection Algorithm</p>
+            <p className="text-amber-400 text-sm font-semibold">{t("viz_algo_title")}</p>
           </div>
 
           <p className="text-[#9A9A80] text-sm leading-relaxed">
             Imagine trying to hear <span className="text-[#F5F0E0] font-semibold">one person whispering</span> in a stadium full of noise. That's the challenge of detecting a single molecule in blood. I built a pattern recognition system that takes a chaotic sensor signal, strips away noise and interference layer by layer, and{" "}
             <span className="text-[#F5F0E0] font-semibold">identifies the molecule's unique chemical fingerprint</span> — even at concentrations invisible to conventional methods.
           </p>
+
+          {/* Mission callout */}
+          <div className="flex items-start gap-2 border-s-2 border-amber-400 bg-amber-400/5 rounded-e-lg px-3 py-2.5">
+            <span className="text-amber-400 flex-shrink-0 mt-0.5">🎯</span>
+            <p className="text-xs text-[#F5F0E0] font-medium leading-relaxed">{t("viz_mission")}</p>
+          </div>
 
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#0B0B08] rounded-xl p-3 border border-[#2A2A1E] text-center">
@@ -84,7 +92,7 @@ export function RamanSenseViz() {
             </div>
             <div className="bg-[#0B0B08] rounded-xl p-3 border border-[#2A2A1E] text-center">
               <div className="text-lime-400 font-bold text-xl">1 µM</div>
-              <div className="text-[#9A9A80] text-xs mt-0.5">In blood</div>
+              <div className="text-[#9A9A80] text-xs mt-0.5">{t("viz_step1_sub")}</div>
             </div>
             <div className="bg-[#0B0B08] rounded-xl p-3 border border-[#2A2A1E] text-center">
               <div className="text-lime-400 font-bold text-xl">PCA</div>
@@ -115,7 +123,7 @@ export function RamanSenseViz() {
 
           {/* Pipeline flow */}
           <div>
-            <p className="text-[#9A9A80] text-xs font-semibold uppercase tracking-widest mb-3">Detection Pipeline</p>
+            <p className="text-[#9A9A80] text-xs font-semibold uppercase tracking-widest mb-3">{t("viz_pipeline_title")}</p>
             <div className="flex items-start gap-1 sm:gap-2 flex-wrap sm:flex-nowrap">
               {PIPELINE.map((step, i) => (
                 <div key={i} className="flex items-center gap-1 sm:gap-2 flex-1 min-w-0">
@@ -158,15 +166,9 @@ export function RamanSenseViz() {
             <div className="bg-[#0B0B08] rounded-xl p-3 border border-[#2A2A1E]">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2 h-2 rounded-full bg-red-500/70" />
-                <span className="text-[#9A9A80] text-xs font-semibold">Raw Signal</span>
+                <span className="text-[#9A9A80] text-xs font-semibold">{t("viz_raw_title")}</span>
               </div>
               <svg viewBox="0 0 400 95" className="w-full h-24" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="noiseGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#9A9A80" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#9A9A80" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
                 <motion.path
                   d={NOISY_PATH}
                   fill="none"
@@ -178,14 +180,14 @@ export function RamanSenseViz() {
                 />
                 <line x1="0" y1="88" x2="400" y2="88" stroke="#2A2A1E" strokeWidth="1" />
               </svg>
-              <p className="text-center text-[#9A9A80] text-xs mt-1">Noise obscures signal</p>
+              <p className="text-center text-[#9A9A80] text-xs mt-1">{t("viz_raw_sub")}</p>
             </div>
 
             {/* After */}
             <div className="bg-[#0B0B08] rounded-xl p-3 border border-lime-400/20">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2 h-2 rounded-full bg-lime-400" />
-                <span className="text-[#9A9A80] text-xs font-semibold">After RamanSense</span>
+                <span className="text-[#9A9A80] text-xs font-semibold">{t("viz_clean_title")}</span>
               </div>
               <svg viewBox="0 0 400 95" className="w-full h-24" preserveAspectRatio="none">
                 <defs>
@@ -227,13 +229,13 @@ export function RamanSenseViz() {
                 ))}
                 <line x1="0" y1="88" x2="400" y2="88" stroke="#2A2A1E" strokeWidth="1" />
               </svg>
-              <p className="text-center text-lime-400 text-xs font-semibold mt-1">4-ATP fingerprint identified ✓</p>
+              <p className="text-center text-lime-400 text-xs font-semibold mt-1">{t("viz_clean_sub")}</p>
             </div>
           </div>
 
           {/* Algorithm steps */}
           <div>
-            <p className="text-[#9A9A80] text-xs font-semibold uppercase tracking-widest mb-2">Processing Steps</p>
+            <p className="text-[#9A9A80] text-xs font-semibold uppercase tracking-widest mb-2">{t("viz_algo_steps")}</p>
             <div className="flex flex-wrap gap-2">
               {ALGO_STEPS.map((step, i) => (
                 <motion.span

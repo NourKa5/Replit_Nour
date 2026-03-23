@@ -103,6 +103,19 @@ export function About() {
           >
             <h3 className="text-2xl font-bold text-[#F5F0E0]">{t("about_h3")}</h3>
             <p className="text-lg text-[#9A9A80] leading-relaxed">{t("about_p1")}</p>
+
+            {/* Research mission callout */}
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.25, duration: 0.5 }}
+              className="flex items-start gap-3 border-s-2 border-amber-400 bg-amber-400/5 rounded-e-xl px-4 py-3"
+            >
+              <span className="text-amber-400 text-lg mt-0.5 flex-shrink-0">🎯</span>
+              <p className="text-sm text-[#F5F0E0] font-medium leading-relaxed">{t("about_mission")}</p>
+            </motion.div>
+
             <p className="text-lg text-[#9A9A80] leading-relaxed">{t("about_p2")}</p>
             <p className="text-lg text-[#9A9A80] leading-relaxed">{t("about_p3")}</p>
 
