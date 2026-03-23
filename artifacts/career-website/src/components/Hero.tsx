@@ -25,7 +25,7 @@ function SplitText({ text, className, delay = 0 }: { text: string; className?: s
 
 const STATS = [
   { num: 2.5, decimals: 1, suffix: " Yrs", label: "R&D Experience",    startDelay: 900 },
-  { num: 7,   decimals: 0, suffix: "",     label: "Projects Completed", startDelay: 1000 },
+  { num: 8,   decimals: 0, suffix: "",     label: "Projects Completed", startDelay: 1000 },
   { num: 1,   decimals: 0, suffix: "",     label: "Paper Under Review", startDelay: 1100 },
   { num: 80,  decimals: 0, suffix: "+",    label: "GPA / BGU Negev",    startDelay: 1200 },
 ];

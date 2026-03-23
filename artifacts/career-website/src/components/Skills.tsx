@@ -16,7 +16,7 @@ export function Skills() {
       titleKey: "skill_cat2" as const,
       icon: Code2,
       color: "lime",
-      skills: ["Python", "NumPy / Pandas", "Matplotlib / Seaborn", "SQL / MySQL", "MATLAB", "Excel Advanced", "PCA / PLS / PCR", "Signal Processing"]
+      skills: ["Python", "NumPy / Pandas", "Matplotlib / Seaborn", "SQL / MySQL", "MATLAB", "Excel Advanced", "PCA / PLS / PCR", "Signal Processing", "Pattern Recognition"]
     },
     {
       titleKey: "skill_cat3" as const,
