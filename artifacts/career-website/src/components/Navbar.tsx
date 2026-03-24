@@ -102,7 +102,7 @@ export function Navbar() {
               <SpectrumLogo />
             </div>
             <span className="font-display font-bold text-xl tracking-tight">
-              <span className="text-amber-400">Nour</span><span className="text-[#F5F0E0]"> Karawani</span>
+              <span className="text-amber-400">{t("nav_name_first")}</span><span className="text-[#F5F0E0]"> {t("nav_name_last")}</span>
             </span>
           </Link>
 
@@ -149,7 +149,14 @@ export function Navbar() {
                 <a
                   key={link.key}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileMenuOpen(false);
+                    setTimeout(() => {
+                      const id = link.href.slice(1);
+                      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                    }, 320);
+                  }}
                   className="text-base font-medium text-[#9A9A80] hover:text-amber-400 px-2 transition-colors"
                 >
                   {t(link.key)}

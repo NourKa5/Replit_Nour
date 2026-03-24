@@ -5,6 +5,9 @@ export type Lang = "en" | "ar" | "he";
 export const translations = {
   en: {
     // Navbar
+    nav_name_first: "Nour",
+    nav_name_last: "Karawani",
+    hero_name: "Nour Karawani",
     nav_about: "About",
     nav_skills: "Skills",
     nav_projects: "Projects",
@@ -166,6 +169,9 @@ export const translations = {
 
   ar: {
     // Navbar
+    nav_name_first: "نور",
+    nav_name_last: "قرواني",
+    hero_name: "نور قرواني",
     nav_about: "نبذة",
     nav_skills: "المهارات",
     nav_projects: "المشاريع",
@@ -327,6 +333,9 @@ export const translations = {
 
   he: {
     // Navbar
+    nav_name_first: "נור",
+    nav_name_last: "קרואני",
+    hero_name: "נור קרואני",
     nav_about: "אודות",
     nav_skills: "כישורים",
     nav_projects: "פרויקטים",

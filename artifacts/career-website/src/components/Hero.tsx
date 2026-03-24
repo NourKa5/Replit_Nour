@@ -128,7 +128,7 @@ export function Hero() {
           {/* Animated title */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.1] tracking-tight mb-3 sm:mb-5">
             <span className="block">
-              <SplitText text="Nour Karawani" className="text-[#F5F0E0]" delay={0.1} />
+              <SplitText text={t("hero_name")} className="text-[#F5F0E0]" delay={0.1} />
             </span>
             <motion.span initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
               className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl mt-1 sm:mt-2 text-[#9A9A80]">
