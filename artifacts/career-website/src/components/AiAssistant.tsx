@@ -390,7 +390,16 @@ export function AiAssistant() {
               onSubmit={handleSubmit}
               className="px-3 py-3 border-t border-[#2A2A1E] flex gap-2 bg-[#1A1A14] flex-shrink-0 items-center"
             >
-              {/* Voice button */}
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={listening ? "Listening…" : "Ask about Nour..."}
+                className="flex-1 px-4 py-2.5 bg-[#1E1E18] border border-[#2A2A1E] rounded-2xl text-sm text-[#F5F0E0] placeholder:text-[#9A9A80] focus:outline-none focus:border-amber-400/40 focus:ring-2 focus:ring-amber-400/10 min-w-0"
+                disabled={loading}
+              />
+
+              {/* Voice button — right side, clear of accessibility widget */}
               {hasSpeechRecognition && (
                 <motion.button
                   type="button"
@@ -408,15 +417,6 @@ export function AiAssistant() {
                   {listening ? <MicOff size={16} /> : <Mic size={16} />}
                 </motion.button>
               )}
-
-              <input
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder={listening ? "Listening…" : "Ask about Nour..."}
-                className="flex-1 px-4 py-2.5 bg-[#1E1E18] border border-[#2A2A1E] rounded-2xl text-sm text-[#F5F0E0] placeholder:text-[#9A9A80] focus:outline-none focus:border-amber-400/40 focus:ring-2 focus:ring-amber-400/10 min-w-0"
-                disabled={loading}
-              />
 
               <button
                 type="submit"
