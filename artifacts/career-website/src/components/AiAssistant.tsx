@@ -48,6 +48,7 @@ export function AiAssistant() {
   const [streaming, setStreaming] = useState("");
   const [size, setSize] = useState({ w: DEFAULT_W, h: DEFAULT_H });
   const [listening, setListening] = useState(false);
+  const [voiceError, setVoiceError] = useState<string | null>(null);
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -106,6 +107,7 @@ export function AiAssistant() {
       return;
     }
 
+    setVoiceError(null);
     const recognition = new SpeechRecognition();
     recognitionRef.current = recognition;
     recognition.lang = "en-US";
@@ -118,10 +120,28 @@ export function AiAssistant() {
       setListening(false);
     };
 
-    recognition.onerror = () => setListening(false);
+    recognition.onerror = (e: any) => {
+      setListening(false);
+      if (e.error === "not-allowed" || e.error === "permission-denied") {
+        setVoiceError("Microphone blocked — allow access in your browser settings.");
+      } else if (e.error === "network") {
+        setVoiceError("Network error. Check your connection and try again.");
+      } else if (e.error !== "aborted") {
+        setVoiceError("Voice input failed. Try typing instead.");
+      }
+      setTimeout(() => setVoiceError(null), 4000);
+    };
+
     recognition.onend = () => setListening(false);
-    recognition.start();
-    setListening(true);
+
+    try {
+      recognition.start();
+      setListening(true);
+    } catch {
+      setListening(false);
+      setVoiceError("Could not start microphone. Try allowing access and retry.");
+      setTimeout(() => setVoiceError(null), 4000);
+    }
   }, [listening]);
 
   const sendMessage = async (text: string) => {
@@ -384,6 +404,21 @@ export function AiAssistant() {
 
               <div ref={bottomRef} />
             </div>
+
+            {/* Voice error toast */}
+            <AnimatePresence>
+              {voiceError && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  className="mx-3 mb-1 px-3 py-2 bg-red-500/10 border border-red-500/30 rounded-xl text-xs text-red-400 flex items-center gap-2 flex-shrink-0"
+                >
+                  <MicOff size={12} className="flex-shrink-0" />
+                  {voiceError}
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Input bar */}
             <form
