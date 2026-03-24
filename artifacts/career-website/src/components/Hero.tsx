@@ -6,6 +6,25 @@ import { useLanguage } from "@/lib/i18n";
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 function SplitText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
+  const isRTL = /[\u0600-\u06FF\u0590-\u05FF]/.test(text);
+  if (isRTL) {
+    const words = text.split(" ").filter(Boolean);
+    return (
+      <span className={`inline-flex flex-wrap gap-x-3 ${className}`} aria-label={text} dir="rtl">
+        {words.map((word, i) => (
+          <motion.span
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: delay + i * 0.18, ease: [0.22, 1, 0.36, 1] }}
+            style={{ display: "inline-block" }}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </span>
+    );
+  }
   return (
     <span className={`inline-flex flex-wrap ${className}`} aria-label={text}>
       {text.split("").map((char, i) => (
