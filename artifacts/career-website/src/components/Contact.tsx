@@ -34,7 +34,7 @@ export function Contact() {
         });
         form.reset();
       },
-      onError: (error) => {
+      onError: (error: Error) => {
         toast({
           title: "Error",
           description: error.message || "Failed to send message. Please try again.",

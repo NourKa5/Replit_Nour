@@ -24,7 +24,7 @@ router.post("/contact", async (req, res) => {
   const emailResult = await resend.emails.send({
     from: "Portfolio Contact <onboarding@resend.dev>",
     to: NOUR_EMAIL,
-    reply_to: email,
+    replyTo: email,
     subject: `New message from ${name} — Portfolio`,
     html: `
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:24px;background:#0B0B08;color:#F5F0E0;border-radius:12px;">

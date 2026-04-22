@@ -231,7 +231,7 @@ function PhotonCatcher({ onBack }: { onBack: () => void }) {
   const [allSpawned, setAllSpawned] = useState(false);
   const usedIdx = useRef<number[]>([]);
   const nextId = useRef(0);
-  const popupTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const popupTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const timeRef = useRef(GAME_DURATION);
 
   const spawnOne = useCallback(() => {
