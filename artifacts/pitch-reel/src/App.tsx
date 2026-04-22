@@ -14,6 +14,14 @@ export default function App() {
   const startTimeRef = useRef<number>(performance.now());
   const rafRef = useRef<number | null>(null);
 
+  // Preload project images at mount so Scene 3 doesn't stutter when first shown
+  useEffect(() => {
+    [ramanImg, shopaiImg, boxSortImg].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   useEffect(() => {
     if (isPaused) return;
 
