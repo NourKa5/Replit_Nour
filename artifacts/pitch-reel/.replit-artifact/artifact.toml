@@ -17,6 +17,15 @@ localPort = 20724
 [services.development]
 run = "pnpm --filter @workspace/pitch-reel run dev"
 
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/pitch-reel", "run", "build" ]
+publicDir = "artifacts/pitch-reel/dist"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/pitch-reel/*"
+to = "/index.html"
+
 [services.env]
 PORT = "20724"
 BASE_PATH = "/pitch-reel"
