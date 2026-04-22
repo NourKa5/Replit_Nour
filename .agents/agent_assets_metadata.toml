@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "5JpQEkNxitg7vdG9rgi74"
+uri = "file://artifacts/pitch-reel/src/assets/raman-sense.png"
+type = "image"
+title = "raman sense project"
+
+[[generated]]
+id = "GUfiPfoIFL3Lr6Mqx1gIf"
+uri = "file://artifacts/pitch-reel/src/assets/shopai.png"
+type = "image"
+title = "shopai platform"
+
+[[generated]]
+id = "RVjrq_Fkhn7tAJest7xKd"
+uri = "file://artifacts/pitch-reel/src/assets/box-sorting.png"
+type = "image"
+title = "box sorting system"
