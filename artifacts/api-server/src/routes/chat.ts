@@ -1,5 +1,5 @@
 import { Router } from "express";
-import OpenAI from "openai";
+import { OpenAI } from "openai";
 
 const router = Router();
 
